@@ -1,0 +1,25 @@
+mongo:
+  image: devopsopen/docker-com-mongo
+  ports:
+    - "27017:27017"
+
+cap_scm:
+  image: devopsopen/docker-scm-gitlab
+  ports:
+    - "6010:80"
+
+cap_ci:
+  image: devopsopen/docker-ci-jenkins
+  ports:
+    - "6080:8080"
+  links:
+    - cap_scm
+
+cap_cq:
+  image: devopsopen/docker-cq-sonarqube
+  ports:
+    - "6000:9000"
+    - "6092:9092"
+  links:
+    - cap_scm
+    - cap_ci
