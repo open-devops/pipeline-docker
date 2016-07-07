@@ -8,6 +8,11 @@ cap_scm:
   ports:
     - "6010:80"
 
+artifactory:
+  image: devopsopen/docker-scm-artifactory
+  ports:
+    - "6011:8081"
+
 cap_ci:
   image: devopsopen/docker-ci-jenkins
   ports:
