@@ -6,25 +6,25 @@ mongo:
 cap_scm:
   image: devopsopen/docker-scm-gitlab
   ports:
-    - "6010:80"
+    - "9010:80"
 
 artifactory:
   image: devopsopen/docker-scm-artifactory
   ports:
-    - "6011:8081"
+    - "9011:8081"
 
 cap_ci:
   image: devopsopen/docker-ci-jenkins
   ports:
-    - "6080:8080"
+    - "9080:8080"
   links:
     - cap_scm
 
 cap_cq:
   image: devopsopen/docker-cq-sonarqube
   ports:
-    - "6000:9000"
-    - "6092:9092"
+    - "9000:9000"
+    - "9092:9092"
   links:
     - cap_scm
     - cap_ci
