@@ -13,7 +13,7 @@ artifactory:
   ports:
     - "9011:8081"
 
-cap_ca
+cap_ca:
   image: devopsopen/docker-ca-wekan
   ports:
     - "9090:80"
