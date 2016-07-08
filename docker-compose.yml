@@ -18,7 +18,7 @@ cap_ca
   ports:
     - "9090:80"
   links:
-    - cap_scm:db
+    - mongo:db
   environment:
     - MONGO_URL=mongodb://db
     - ROOT_URL=http://127.0.0.1
