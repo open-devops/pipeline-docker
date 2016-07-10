@@ -23,6 +23,11 @@ cap_ca:
     - MONGO_URL=mongodb://db
     - ROOT_URL=http://127.0.0.1
 
+jira:
+  image: devopsopen/docker-ca-jjira
+  ports:
+    - "9091:80"
+
 hyapi:
   image: devopsopen/docker-cov-hyapi
   ports:
@@ -36,7 +41,7 @@ hyapi:
 hygui:
   image: devopsopen/docker-cov-hygui
   ports:
-    - "8088:80"
+    - "9088:80"
   links:
     - hyapi:hygieia-api
   environment:
