@@ -22,6 +22,9 @@ echo
 echo "#  Image: hygieia UI"
 docker pull devopsopen/docker-cov-hygui        
 echo
+echo "#  Image: wekan"
+docker pull devopsopen/docker-ca-wekan       
+echo
 echo "#  Image: artifactory"
 docker pull devopsopen/docker-scm-artifactory  
 echo
