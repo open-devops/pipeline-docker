@@ -24,7 +24,7 @@ cap_ca:
     - ROOT_URL=http://127.0.0.1
 
 jira:
-  image: devopsopen/docker-ca-jjira
+  image: devopsopen/docker-ca-jira
   ports:
     - "9091:80"
 
