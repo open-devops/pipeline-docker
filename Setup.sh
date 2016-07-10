@@ -25,6 +25,9 @@ echo
 echo "#  Image: wekan"
 docker pull devopsopen/docker-ca-wekan       
 echo
+echo "#  Image: jira"
+docker pull devopsopen/docker-ca-jira       
+echo
 echo "#  Image: artifactory"
 docker pull devopsopen/docker-scm-artifactory  
 echo
