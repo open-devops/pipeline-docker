@@ -22,7 +22,7 @@ capability_mgnt(){
 
   echo "## ${capa} ${port}: ${action} begins ..."
   docker-compose ${action} ${capa} >>$TEMP_LOG_FILE 2>&1 &
-  sleep 1
+  sleep 3
   echo "## ${capa} ${port}: ${action} end    ..."
   echo
 }
