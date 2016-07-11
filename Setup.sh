@@ -29,16 +29,10 @@ capability_mgnt(){
 
 date
 echo "## pipeline init ..."
-pull_docker_image devopsopen/docker-base
-pull_docker_image devopsopen/docker-ci-jenkins
-pull_docker_image devopsopen/docker-cov-hyapi
-pull_docker_image devopsopen/docker-com-mongo
-pull_docker_image devopsopen/docker-cq-sonarqube
-pull_docker_image devopsopen/docker-cov-hygui
-pull_docker_image devopsopen/docker-ca-wekan
-pull_docker_image devopsopen/docker-ca-jira
-pull_docker_image devopsopen/docker-scm-artifactory
-pull_docker_image devopsopen/docker-scm-gitlab
+for image in base ci-jenkins hyapi mongo sonarqube hygui wekan jira artifactory gitlab
+do
+  pull_docker_image devopsopen/docker-${image}
+done
 date
 
 echo "## pipeline up "
