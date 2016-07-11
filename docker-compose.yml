@@ -38,6 +38,14 @@ hyapi:
     - SPRING_DATA_MONGODB_HOST=localhost
     - SPRING_DATA_MONGODB_PORT=27017
 
+hyson:
+  image: devopsopen/docker-cov-hyson
+  links:
+    - mongo:mongo
+  environment:
+    - SPRING_DATA_MONGODB_HOST=localhost
+    - SPRING_DATA_MONGODB_PORT=27017
+
 hygui:
   image: devopsopen/docker-cov-hygui
   ports:
