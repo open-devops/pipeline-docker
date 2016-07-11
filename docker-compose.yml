@@ -46,6 +46,22 @@ hyson:
     - SPRING_DATA_MONGODB_HOST=localhost
     - SPRING_DATA_MONGODB_PORT=27017
 
+hyjen:
+  image: devopsopen/docker-cov-hyjen
+  links:
+    - mongo:mongo
+  environment:
+    - SPRING_DATA_MONGODB_HOST=localhost
+    - SPRING_DATA_MONGODB_PORT=27017
+
+hysvn:
+  image: devopsopen/docker-cov-hysvn
+  links:
+    - mongo:mongo
+  environment:
+    - SPRING_DATA_MONGODB_HOST=localhost
+    - SPRING_DATA_MONGODB_PORT=27017
+
 hygui:
   image: devopsopen/docker-cov-hygui
   ports:
