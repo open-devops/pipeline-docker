@@ -2,6 +2,9 @@ mongo:
   image: devopsopen/docker-com-mongo
   ports:
     - "27017:27017"
+  volumes:
+    - /data/configdb
+    - /data/db
 
 cap_scm:
   image: devopsopen/docker-scm-gitlab
