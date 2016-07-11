@@ -54,3 +54,6 @@ capability_mgnt up cap_cq 9092
 
 echo "## pipeline ps "
 docker-compose ps
+echo
+
+echo "## confirm log result: ${TEMP_LOG_FILE}"
