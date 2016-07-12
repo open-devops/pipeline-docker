@@ -182,28 +182,38 @@ capability_mgnt(){
   echo
 }
 
+usage(){
+  echo "Usage: $0 init|up|status|stop [capability]"
+  echo "       capablity: jenkins|mongodb|mariadb"
+  echo "                  sonarqube|gitlab|wekan"
+  echo "                  jira|artifactory|hygieia"
+  echo "                  all(default)"
+}
+
+action="$1"
+capa="$2"
+
+if [ $# -lt 1 ]; then
+  usage
+  exit 1
+fi
+
 date
-echo "## pipeline init ..."
-for image in base ci-jenkins cov-hyapi com-mongo cov-sonarqube cov-hygui \
-    ca-wekan ca-jira scm-artifactory scm-gitlab
-do
-  pull_docker_image devopsopen/docker-${image}
-done
+if [ _"init" = _"${action}" ]; then
+  echo "## pipeline init ..."
+  for image in base ci-jenkins cov-hyapi com-mongo cov-sonarqube cov-hygui \
+      ca-wekan ca-jira scm-artifactory scm-gitlab
+  do
+    pull_docker_image devopsopen/docker-${image}
+  done
+elif [ _"up" = _"${action}" ]; then
+  capability_mgnt ${action} ${capa}
+elif [ _"status" = _"${action}" ]; then
+  capability_mgnt ${action} ${capa}
+elif [ _"stop" = _"${action}" ]; then
+  capability_mgnt ${action} ${capa}
+else
+  usage
+  exit 1
+fi
 date
-
-echo "## pipeline up "
-capability_mgnt up mongo 27017
-capability_mgnt up cap_scm 9010
-capability_mgnt up artifactory 9011
-capability_mgnt up cap_ca 9090
-capability_mgnt up jira 9091
-capability_mgnt up hyapi 8080
-capability_mgnt up hygui 9088
-capability_mgnt up cap_ci 9080
-capability_mgnt up cap_cq 9092
-
-echo "## pipeline ps "
-docker-compose ps
-echo
-
-echo "## confirm log result: ${TEMP_LOG_FILE}"
