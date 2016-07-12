@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 LINENODECHAR="+"
 LINECONNCHAR="-"
 DATANODECHAR="|"
