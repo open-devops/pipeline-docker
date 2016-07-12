@@ -159,32 +159,33 @@ show_image_info(){
   tbl_print_data
 }
 
+show_log_info(){
+  log_name="$1"
+
+  #print data
+  tbl_set_col_max 2
+  tbl_set_left_margin 1
+  tbl_set_size 10 70
+  tbl_set_title LOG LOG_FILENAME
+  tbl_print_title
+
+  tbl_set_data "No.1" "${log_name}"
+  tbl_print_data
+}
+
 TEMP_LOG_FILE=/tmp/pipeline_devops_docker.log.$$
 pull_docker_image(){
   image_name="$1"
   echo "##  pipeline init : ${image_name}"
   docker pull ${image_name} >/dev/null 2>&1
-  
+
   image_info=`docker images |grep ${image_name} 2>/dev/null`
   image_info_name=`echo ${image_info} |awk '{print $1}'`
   image_info_tag=`echo ${image_info} |awk '{print $2}'`
   image_info_id=`echo ${image_info} |awk '{print $3}'`
   image_info_size=`echo ${image_info} |awk '{print $7 $8}'`
-  
+
   show_image_info ${image_info_name} ${image_info_tag} ${image_info_id} ${image_info_size}
-  echo
-}
-
-capability_mgnt(){
-  action="$1"
-  capa="$2"
-  port="$3"
-  SLEEP_TIME=3
-
-  echo "## ${capa} ${port}: ${action} begins ..."
-  docker-compose ${action} ${capa} >>$TEMP_LOG_FILE 2>&1 &
-  sleep 3
-  echo "## ${capa} ${port}: ${action} end    ..."
   echo
 }
 
@@ -213,13 +214,17 @@ if [ _"init" = _"${action}" ]; then
     pull_docker_image devopsopen/docker-${image}
   done
 elif [ _"up" = _"${action}" ]; then
-  capability_mgnt ${action} ${capa}
+  docker-compose ${action} ${capa}
+  sleep 2
+  echo "Capabilities may needs a little until running complete, please check log for detail"
+  show_log_info ${TEMP_LOG_FILE}
 elif [ _"status" = _"${action}" ]; then
-  capability_mgnt ${action} ${capa}
+  docker-compose "ps" ${capa}
 elif [ _"stop" = _"${action}" ]; then
-  capability_mgnt ${action} ${capa}
+  docker-compose ${action} ${capa}
 else
   usage
   exit 1
 fi
+
 date
