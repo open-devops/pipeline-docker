@@ -219,7 +219,9 @@ elif [ _"up" = _"${action}" ]; then
   echo "Capabilities may needs a little until running complete, please check log for detail"
   show_log_info ${TEMP_LOG_FILE}
 elif [ _"status" = _"${action}" ]; then
-  docker-compose "ps" ${capa}
+  echo "## pipeline status"
+  docker-compose ps
+  echo "## pipeline status"
 elif [ _"stop" = _"${action}" ]; then
   docker-compose ${action} ${capa}
 else
