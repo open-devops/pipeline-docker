@@ -184,7 +184,8 @@ capability_mgnt(){
 
 date
 echo "## pipeline init ..."
-for image in base ci-jenkins hyapi mongo sonarqube hygui wekan jira artifactory gitlab
+for image in base ci-jenkins cov-hyapi com-mongo cov-sonarqube cov-hygui \
+    ca-wekan ca-jira scm-artifactory scm-gitlab
 do
   pull_docker_image devopsopen/docker-${image}
 done
