@@ -142,30 +142,36 @@ tbl_print_data(){
   tbl_print_title_botom
 }
 
-show_process_status(){
-  STATUS="$1"
-  YAMLFILE="${ROOT_DIR}/config/${2}.yaml"
+show_image_info(){
+  image_name="$1"
+  tag_name="$2"
+  image_id="$3"
+  size="$4"
 
   #print data
-  tbl_set_col_max 2
+  tbl_set_col_max 4
   tbl_set_left_margin 1
-  tbl_set_size 20 40
-  tbl_set_title TYPE STATUS
+  tbl_set_size 40 10 15 15
+  tbl_set_title IMAGE TAG IMAGE_ID SIZE
   tbl_print_title
 
-  tbl_set_data "$2" "$1"
+  tbl_set_data "${image_name}" "${tag_name}" "${image_id}" "${size}"
   tbl_print_data
 }
 
 TEMP_LOG_FILE=/tmp/pipeline_devops_docker.log.$$
-
 pull_docker_image(){
   image_name="$1"
-  echo "#   Image: ${image_name}"
-  docker images |grep ${image_name} 2>/dev/null
-  if [ $? -ne 0 ]; then
-    docker pull ${image_name}
-  fi
+  echo "##  pipeline init : ${image_name}"
+  docker pull ${image_name} >/dev/null 2>&1
+  
+  image_info=`docker images |grep ${image_name} 2>/dev/null`
+  image_info_name=`echo ${image_info} |awk '{print $1}'`
+  image_info_tag=`echo ${image_info} |awk '{print $2}'`
+  image_info_id=`echo ${image_info} |awk '{print $3}'`
+  image_info_size=`echo ${image_info} |awk '{print $7 $8}'`
+  
+  show_image_info ${image_info_name} ${image_info_tag} ${image_info_id} ${image_info_size}
   echo
 }
 
@@ -200,8 +206,8 @@ fi
 
 date
 if [ _"init" = _"${action}" ]; then
-  echo "## pipeline init ..."
-  for image in base ci-jenkins cov-hyapi com-mongo cov-sonarqube cov-hygui \
+  echo "##  pipeline init will pull latest images from devopsopen of dockhub"
+  for image in base ci-jenkins cov-hyapi com-mongo cq-sonarqube cov-hygui \
       ca-wekan ca-jira scm-artifactory scm-gitlab
   do
     pull_docker_image devopsopen/docker-${image}
