@@ -5,19 +5,19 @@ mongo:
   volumes:
     - /data/configdb
     - /data/db
- restart: always
+  restart: always
 
 cap_scm:
   image: devopsopen/docker-scm-gitlab
   ports:
     - "9010:80"
- restart: always
+  restart: always
  
 artifactory:
   image: devopsopen/docker-scm-artifactory
   ports:
     - "9011:8081"
- restart: always
+  restart: always
  
 cap_ca:
   image: devopsopen/docker-ca-wekan
@@ -28,13 +28,13 @@ cap_ca:
   environment:
     - MONGO_URL=mongodb://db
     - ROOT_URL=http://127.0.0.1
- restart: always
+  restart: always
 
 jira:
   image: devopsopen/docker-ca-jira
   ports:
     - "9091:8080"
- restart: always
+  restart: always
 
 hyapi:
   image: devopsopen/docker-cov-hyapi
@@ -45,7 +45,7 @@ hyapi:
   environment:
     - SPRING_DATA_MONGODB_HOST=localhost
     - SPRING_DATA_MONGODB_PORT=27017
- restart: always
+  restart: always
 
 hyson:
   image: devopsopen/docker-cov-hyson
@@ -54,7 +54,7 @@ hyson:
   environment:
     - SPRING_DATA_MONGODB_HOST=localhost
     - SPRING_DATA_MONGODB_PORT=27017
- restart: always
+  restart: always
 
 hyjen:
   image: devopsopen/docker-cov-hyjen
@@ -63,7 +63,7 @@ hyjen:
   environment:
     - SPRING_DATA_MONGODB_HOST=localhost
     - SPRING_DATA_MONGODB_PORT=27017
- restart: always
+  restart: always
 
 hysvn:
   image: devopsopen/docker-cov-hysvn
@@ -72,7 +72,7 @@ hysvn:
   environment:
     - SPRING_DATA_MONGODB_HOST=localhost
     - SPRING_DATA_MONGODB_PORT=27017
- restart: always
+  restart: always
 
 hygui:
   image: devopsopen/docker-cov-hygui
@@ -83,7 +83,7 @@ hygui:
   environment:
     - SPRING_DATA_MONGODB_HOST=localhost
     - SPRING_DATA_MONGODB_PORT=27017
- restart: always
+  restart: always
 
 cap_ci:
   image: devopsopen/docker-ci-jenkins
@@ -91,7 +91,7 @@ cap_ci:
     - "9080:8080"
   links:
     - cap_scm
- restart: always
+  restart: always
 
 cap_cq:
   image: devopsopen/docker-cq-sonarqube
@@ -101,4 +101,4 @@ cap_cq:
   links:
     - cap_scm
     - cap_ci
- restart: always
+  restart: always
