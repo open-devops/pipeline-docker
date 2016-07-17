@@ -209,7 +209,7 @@ date
 if [ _"init" = _"${action}" ]; then
   echo "##  pipeline init will pull latest images from devopsopen of dockhub"
   for image in base ci-jenkins cov-hyapi com-mongo cq-sonarqube cov-hygui \
-      ca-wekan ca-jira scm-artifactory scm-gitlab
+      ca-wekan ca-jira scm-artifactory scm-gitlab cov-hyson cov-hyjen cov-hysvn
   do
     pull_docker_image devopsopen/docker-${image}
   done
