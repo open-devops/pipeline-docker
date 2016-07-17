@@ -15,3 +15,17 @@ sh pipeline ps
 
 #pipeline stop 
 sh pipeline stop
+
+#external ports
+ca: wekan:9090
+ca: jira :9091
+
+scm:gitlab:9010
+scm:artifactory:9011
+
+cov:hygui:9088
+
+
+ci:jenkins:9080
+
+cq:sonarqube:9000
