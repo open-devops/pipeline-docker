@@ -39,7 +39,7 @@ jira:
 hyapi:
   image: devopsopen/docker-cov-hyapi
   ports:
-    - "8080:8080"
+    - "9888:8080"
   links:
     - mongo:mongo
   environment:
