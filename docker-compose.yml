@@ -102,3 +102,9 @@ cap_cq:
     - cap_scm
     - cap_ci
   restart: always
+
+portal:
+  image: devopsopen/docker-pipeline-portal
+  ports:
+    - "9999:3000"
+  restart: always
