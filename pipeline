@@ -214,7 +214,7 @@ if [ _"init" = _"${action}" ]; then
     pull_docker_image devopsopen/docker-${image}
   done
 elif [ _"up" = _"${action}" ]; then
-  docker-compose ${action} ${capa} &
+  docker-compose ${action} ${capa} >${TEMP_LOG_FILE} 2>&1 &
   sleep 3
   echo "Capabilities may needs a little until running complete, please check log for detail"
   show_log_info ${TEMP_LOG_FILE}
