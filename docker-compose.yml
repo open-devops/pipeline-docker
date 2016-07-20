@@ -108,3 +108,9 @@ portal:
   ports:
     - "9999:3000"
   restart: always
+
+cadvisor:
+  image: devopsopen/docker-cov-cadvisor
+  ports:
+    - "9998:8080"
+  restart: always
