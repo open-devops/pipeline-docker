@@ -2,14 +2,14 @@
 Pipeline orchestrated by Docker Engine &amp; Docker Compose &amp; Docker Swarm.
 
 #Usage
-##git clone
+  ##git clone
 ```
-git clone git@github.com:open-devops/pipeline-docker
+  git clone git@github.com:open-devops/pipeline-docker
 ```
 
-##pipeline init
+  ##pipeline init
 ```
-cd pipeline-docker; sh pipeline init
+  cd pipeline-docker; sh pipeline init
 ```
 
 ##pipeline start up
@@ -29,7 +29,7 @@ sh pipeline stop
 
 #external ports
 | Type      | Capacity | Port  |
-| :-------- | ----------:| :---: |
+| :------------------- | -------------------------:| :---------------: |
 | ca        | Wekan      |  9090 |
 | ca        | Jira      |  9091 |
 | scm        | Gitlab      |  9010 |
@@ -38,4 +38,3 @@ sh pipeline stop
 | ci        | Jenkins      |  9080 |
 | cq        | Sonarqube      |  9000 |
 
-`[TOC]`
