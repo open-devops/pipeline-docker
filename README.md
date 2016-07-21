@@ -4,8 +4,11 @@ Pipeline orchestrated by Docker Engine &amp; Docker Compose &amp; Docker Swarm.
 #git clone
 git clone git@github.com:open-devops/pipeline-docker
 
-#pipeline init
+#Usage
+##pipeline init
+```
 cd pipeline-docker; sh pipeline init
+```
 
 #pipeline start up
 sh pipeline up
