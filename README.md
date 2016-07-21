@@ -17,6 +17,10 @@ sh pipeline ps
 sh pipeline stop
 
 #external ports
+| Type      | Capability | Port  |
+| :-------- | ----------:| :---: |
+| ca        | wekan      |  9090 |
+| ca        | wekanddd      |  9090 |
 ca: wekan:9090
 
 ca: jira :9091
