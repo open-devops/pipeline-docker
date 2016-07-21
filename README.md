@@ -17,20 +17,12 @@ sh pipeline ps
 sh pipeline stop
 
 #external ports
-| Type      | Capability | Port  |
+| Type      | Capacity | Port  |
 | :-------- | ----------:| :---: |
-| ca        | wekan      |  9090 |
-| ca        | wekanddd      |  9090 |
-ca: wekan:9090
-
-ca: jira :9091
-
-scm:gitlab:9010
-
-scm:artifactory:9011
-
-cov:hygui:9088
-
-ci:jenkins:9080
-
-cq:sonarqube:9000
+| ca        | Wekan      |  9090 |
+| ca        | Jira      |  9091 |
+| scm        | Gitlab      |  9010 |
+| scm        | Artifactory      |  9011 |
+| cov        | Hygui      |  9088 |
+| ci        | Jenkins      |  9080 |
+| cq        | Sonarqube      |  9000 |
