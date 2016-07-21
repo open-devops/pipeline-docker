@@ -1,4 +1,3 @@
-`[TOC]`
 # pipeline-docker
 Pipeline orchestrated by Docker Engine &amp; Docker Compose &amp; Docker Swarm.
 
@@ -38,3 +37,5 @@ sh pipeline stop
 | cov        | Hygui      |  9088 |
 | ci        | Jenkins      |  9080 |
 | cq        | Sonarqube      |  9000 |
+
+`[TOC]`
