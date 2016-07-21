@@ -1,28 +1,27 @@
 # pipeline-docker
 Pipeline orchestrated by Docker Engine &amp; Docker Compose &amp; Docker Swarm.
 
-#Usage
-  ##git clone
+#git clone
 ```
-  git clone git@github.com:open-devops/pipeline-docker
-```
-
-  ##pipeline init
-```
-  cd pipeline-docker; sh pipeline init
+git clone git@github.com:open-devops/pipeline-docker
 ```
 
-##pipeline start up
+#pipeline init
+```
+cd pipeline-docker; sh pipeline init
+```
+
+#pipeline start up
 ```
 sh pipeline up
 ```
 
-##pipeline status confirmation
+#pipeline status confirmation
 ```
 sh pipeline ps
 ```
 
-##pipeline stop 
+#pipeline stop 
 ```
 sh pipeline stop
 ```
