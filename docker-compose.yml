@@ -199,6 +199,14 @@ services:
       - no_proxy="${no_proxy}"
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=dashboard
+      - SPRING_DATA_MONGODB_USERNAME=db
+      - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      #- SONAR_CRON=
+      - SONAR_URL=http://cap_cq:9000
+      #- SONAR_METRICS
+      #- SONAR_USERNAME=
+      #- SONAR_PASSWORD=
     restart: always
 
   hyjen:
