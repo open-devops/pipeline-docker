@@ -240,4 +240,11 @@ services:
       - no_proxy="${no_proxy}"
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=dashboard
+      - SPRING_DATA_MONGODB_USERNAME=db
+      - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      #- SUBVERSION_CRON=
+      #- SUBVERSION_USERNAME
+      #- SUBVERSION_PASSWORD=
+      #- SUBVERSION_COMMIT_THRESHOLD_DAYS=
     restart: always
