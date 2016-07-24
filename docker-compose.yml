@@ -169,7 +169,7 @@ services:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
-      - SPRING_DATA_MONGODB_HOST=localhost
+      - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=dashboard
       - SPRING_DATA_MONGODB_USERNAME=db
@@ -186,11 +186,7 @@ services:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
-      - SPRING_DATA_MONGODB_HOST=localhost
-      - SPRING_DATA_MONGODB_PORT=27017
-      - SPRING_DATA_MONGODB_DATABASE=dashboard
-      - SPRING_DATA_MONGODB_USERNAME=db
-      - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      - HYGIEIA_API_PORT=http://hygieia-api:8080
     restart: always
 
   hyson:
@@ -201,7 +197,7 @@ services:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
-      - SPRING_DATA_MONGODB_HOST=localhost
+      - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
     restart: always
 
@@ -213,7 +209,7 @@ services:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
-      - SPRING_DATA_MONGODB_HOST=localhost
+      - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
     restart: always
 
@@ -225,6 +221,6 @@ services:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
-      - SPRING_DATA_MONGODB_HOST=localhost
+      - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
     restart: always
