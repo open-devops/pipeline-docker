@@ -219,6 +219,15 @@ services:
       - no_proxy="${no_proxy}"
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=dashboard
+      - SPRING_DATA_MONGODB_USERNAME=db
+      - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      #- JENKINS_CRON=
+      - JENKINS_MASTER=http://cap_ci:9080
+      #- JENKINS_SAVE_LOG
+      #- JENKINS_USERNAME=
+      #- JENKINS_API_KEY=
+      #- DOCKER_LOCALHOST=
     restart: always
 
   hysvn:
