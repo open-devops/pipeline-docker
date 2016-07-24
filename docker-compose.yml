@@ -204,7 +204,7 @@ services:
       - SPRING_DATA_MONGODB_PASSWORD=dbpass
       #- SONAR_CRON=
       - SONAR_URL=http://cap_cq:9000
-      #- SONAR_METRICS
+      #- SONAR_METRICS=
       #- SONAR_USERNAME=
       #- SONAR_PASSWORD=
     restart: always
@@ -224,7 +224,7 @@ services:
       - SPRING_DATA_MONGODB_PASSWORD=dbpass
       #- JENKINS_CRON=
       - JENKINS_MASTER=http://cap_ci:9080
-      #- JENKINS_SAVE_LOG
+      #- JENKINS_SAVE_LOG=
       #- JENKINS_USERNAME=
       #- JENKINS_API_KEY=
       #- DOCKER_LOCALHOST=
@@ -244,7 +244,25 @@ services:
       - SPRING_DATA_MONGODB_USERNAME=db
       - SPRING_DATA_MONGODB_PASSWORD=dbpass
       #- SUBVERSION_CRON=
-      #- SUBVERSION_USERNAME
+      #- SUBVERSION_USERNAME=
       #- SUBVERSION_PASSWORD=
       #- SUBVERSION_COMMIT_THRESHOLD_DAYS=
+    restart: always
+
+  hygit:
+    image: devopsopen/docker-cov-hygit
+    links:
+      - mongo:mongo
+    environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=dashboard
+      - SPRING_DATA_MONGODB_USERNAME=db
+      - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      #- GITHUB_CRON=
+      #- GITHUB_HOST=
+      #- GITHUB_COMMIT_THRESHOLD_DAYS=
     restart: always
