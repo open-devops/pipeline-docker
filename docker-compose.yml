@@ -14,6 +14,11 @@ services:
       # for Jira
       - /var/atlassian/jira
       - /opt/atlassian/jira/logs
+      # for sonarqube
+      - /opt/sonarqube/data
+      - /opt/sonarqube/extensions
+      # for hygieia
+      - /hygieia/logs
 
   # database service: mongodb
   mongo:
@@ -23,8 +28,11 @@ services:
     volumes_from:
       - databox
     environment:
-      - MONGO_MAJOR=3.3
-      - MONGO_VERSION=3.3.10
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
+      #- MONGO_MAJOR=3.3
+      #- MONGO_VERSION=3.3.10
     restart: always
 
   # source configuration management: gitlab
@@ -36,6 +44,10 @@ services:
       - "9022:22"
     volumes_from:
       - databox
+    environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
     restart: always
 
   # configuration management: artifactory
@@ -44,7 +56,10 @@ services:
     ports:
       - "9011:8081"
     environment:
-      - ARTIFACTORY_VERSION=4.9.0
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
+      #- ARTIFACTORY_VERSION=4.9.0
       - ARTIFACTORY_HOME=/opt/artifactory
     restart: always
 
@@ -58,6 +73,9 @@ services:
     volumes_from:
       - databox
     environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
       - MONGO_URL=mongodb://db
       - ROOT_URL=http://127.0.0.1
     restart: always
@@ -70,9 +88,12 @@ services:
     volumes_from:
       - databox
     environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
       - JIRA_HOME=/var/atlassian/jira
       - JIRA_INSTALL=/opt/atlassian/jira
-      - JIRA_VERSION=7.1.9
+      #- JIRA_VERSION=7.1.9
     restart: always
 
   # continous integration : jenkins
@@ -80,8 +101,14 @@ services:
     image: devopsopen/docker-ci-jenkins
     ports:
       - "9080:8080"
+    expose:
+      - "5000"
     links:
       - cap_scm
+    environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
     restart: always
 
   # continous quality assurance
@@ -90,10 +117,21 @@ services:
     ports:
       - "9000:9000"
     expose:
-      - 9092
+      - "9092"
     links:
       - cap_scm
       - cap_ci
+    volumes_from:
+      - databox
+    environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
+      #- SONAR_VERSION=5.6
+      - SONARQUBE_HOME=/opt/sonarqube
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=sonar
+      - SONARQUBE_JDBC_URL=
     restart: always
 
   # devops pipeline portal
@@ -101,6 +139,10 @@ services:
     image: devopsopen/docker-pipeline-portal
     ports:
       - "9999:3000"
+    environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
     restart: always
 
   # container resource monitor
@@ -108,18 +150,30 @@ services:
     image: devopsopen/docker-cov-cadvisor
     ports:
       - "9998:8080"
+    environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
     restart: always
 
   # hygieia : monitor
   hyapi:
     image: devopsopen/docker-cov-hyapi
     ports:
-      - "9888:8080"
+      - "8080:8080"
+    volumes_from:
+      - databox
     links:
       - mongo:mongo
     environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
       - SPRING_DATA_MONGODB_HOST=localhost
       - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=dashboard
+      - SPRING_DATA_MONGODB_USERNAME=db
+      - SPRING_DATA_MONGODB_PASSWORD=dbpass
     restart: always
 
   hygui:
@@ -129,8 +183,14 @@ services:
     links:
       - hyapi:hygieia-api
     environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
       - SPRING_DATA_MONGODB_HOST=localhost
       - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=dashboard
+      - SPRING_DATA_MONGODB_USERNAME=db
+      - SPRING_DATA_MONGODB_PASSWORD=dbpass
     restart: always
 
   hyson:
@@ -138,6 +198,9 @@ services:
     links:
       - mongo:mongo
     environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
       - SPRING_DATA_MONGODB_HOST=localhost
       - SPRING_DATA_MONGODB_PORT=27017
     restart: always
@@ -147,6 +210,9 @@ services:
     links:
       - mongo:mongo
     environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
       - SPRING_DATA_MONGODB_HOST=localhost
       - SPRING_DATA_MONGODB_PORT=27017
     restart: always
@@ -156,6 +222,9 @@ services:
     links:
       - mongo:mongo
     environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
       - SPRING_DATA_MONGODB_HOST=localhost
       - SPRING_DATA_MONGODB_PORT=27017
     restart: always
