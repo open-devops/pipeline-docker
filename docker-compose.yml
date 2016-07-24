@@ -202,6 +202,7 @@ services:
       - SPRING_DATA_MONGODB_DATABASE=dashboard
       - SPRING_DATA_MONGODB_USERNAME=db
       - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      - MONGO_PORT=http://mongo:27017
       #- SONAR_CRON=
       - SONAR_URL=http://cap_cq:9000
       #- SONAR_METRICS=
@@ -222,6 +223,7 @@ services:
       - SPRING_DATA_MONGODB_DATABASE=dashboard
       - SPRING_DATA_MONGODB_USERNAME=db
       - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      - MONGO_PORT=http://mongo:27017
       #- JENKINS_CRON=
       - JENKINS_MASTER=http://cap_ci:9080
       #- JENKINS_SAVE_LOG=
@@ -243,6 +245,7 @@ services:
       - SPRING_DATA_MONGODB_DATABASE=dashboard
       - SPRING_DATA_MONGODB_USERNAME=db
       - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      - MONGO_PORT=http://mongo:27017
       #- SUBVERSION_CRON=
       #- SUBVERSION_USERNAME=
       #- SUBVERSION_PASSWORD=
@@ -262,6 +265,7 @@ services:
       - SPRING_DATA_MONGODB_DATABASE=dashboard
       - SPRING_DATA_MONGODB_USERNAME=db
       - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      - MONGO_PORT=http://mongo:27017
       #- GITHUB_CRON=
       #- GITHUB_HOST=
       #- GITHUB_COMMIT_THRESHOLD_DAYS=
