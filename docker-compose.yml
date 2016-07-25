@@ -19,6 +19,10 @@ services:
       - /opt/sonarqube/extensions
       # for hygieia
       - /hygieia/logs
+      # for portal
+      - /portal/config
+      - /portal/log
+      - /portal/data
 
   # database service: mongodb
   mongo:
@@ -139,10 +143,13 @@ services:
     image: devopsopen/docker-pipeline-portal
     ports:
       - "9999:3000"
+    volumes_from:
+      - databox
     environment:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
+      - PORTAL_LOCALHOST="${PORTAL_LOCALHOST}"
     restart: always
 
   # container resource monitor
