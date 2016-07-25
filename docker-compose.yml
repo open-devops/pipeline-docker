@@ -107,8 +107,6 @@ services:
       - "9080:8080"
     expose:
       - "5000"
-    links:
-      - cap_scm
     environment:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
@@ -122,9 +120,6 @@ services:
       - "9000:9000"
     expose:
       - "9092"
-    links:
-      - cap_scm
-      - cap_ci
     volumes_from:
       - databox
     environment:
@@ -200,6 +195,7 @@ services:
     image: devopsopen/docker-cov-hyson
     links:
       - mongo:mongo
+      - cap_cq
     environment:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
@@ -221,6 +217,7 @@ services:
     image: devopsopen/docker-cov-hyjen
     links:
       - mongo:mongo
+      - cap_ci
     environment:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
