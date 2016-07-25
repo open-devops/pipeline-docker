@@ -44,14 +44,15 @@ services:
     image: devopsopen/docker-scm-gitlab
     ports:
       - "9010:80"
-      - "9443:443"
-      - "9022:22"
+    expose:
+      - "443"
+      - "22"
     volumes_from:
       - databox
-    environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+    #environment:
+      #- http_proxy="${http_proxy}"
+      #- https_proxy="${https_proxy}"
+      #- no_proxy="${no_proxy}"
     restart: always
 
   # configuration management: artifactory
