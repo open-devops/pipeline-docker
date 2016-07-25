@@ -37,7 +37,7 @@ services:
       - no_proxy="${no_proxy}"
       #- MONGO_MAJOR=3.3
       #- MONGO_VERSION=3.3.10
-    restart: always
+    restart: never
 
   # source configuration management: gitlab
   cap_scm:
@@ -53,7 +53,7 @@ services:
       #- http_proxy="${http_proxy}"
       #- https_proxy="${https_proxy}"
       #- no_proxy="${no_proxy}"
-    restart: always
+    restart: never
 
   # configuration management: artifactory
   artifactory:
@@ -66,7 +66,7 @@ services:
       - no_proxy="${no_proxy}"
       #- ARTIFACTORY_VERSION=4.9.0
       - ARTIFACTORY_HOME=/opt/artifactory
-    restart: always
+    restart: never
 
   # continous assesement : wekan
   cap_ca:
@@ -81,7 +81,7 @@ services:
       - no_proxy="${no_proxy}"
       - MONGO_URL=mongodb://db
       - ROOT_URL=http://127.0.0.1
-    restart: always
+    restart: never
 
   # continous assesement : Jira
   jira:
@@ -98,7 +98,7 @@ services:
       - JIRA_HOME=/var/atlassian/jira
       - JIRA_INSTALL=/opt/atlassian/jira
       #- JIRA_VERSION=7.1.9
-    restart: always
+    restart: never
 
   # continous integration : jenkins
   cap_ci:
@@ -113,7 +113,7 @@ services:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
-    restart: always
+    restart: never
 
   # continous quality assurance
   cap_cq:
@@ -136,7 +136,7 @@ services:
       - SONARQUBE_JDBC_USERNAME=sonar
       - SONARQUBE_JDBC_PASSWORD=sonar
       - SONARQUBE_JDBC_URL=
-    restart: always
+    restart: never
 
   # devops pipeline portal
   portal:
@@ -150,7 +150,7 @@ services:
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
       - PORTAL_LOCALHOST="${PORTAL_LOCALHOST}"
-    restart: always
+    restart: never
 
   # container resource monitor
   cadvisor:
@@ -161,7 +161,7 @@ services:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
-    restart: always
+    restart: never
 
   # hygieia : monitor
   hyapi:
@@ -181,7 +181,7 @@ services:
       - SPRING_DATA_MONGODB_DATABASE=dashboard
       - SPRING_DATA_MONGODB_USERNAME=db
       - SPRING_DATA_MONGODB_PASSWORD=dbpass
-    restart: always
+    restart: never
 
   hygui:
     image: devopsopen/docker-cov-hygui
@@ -194,7 +194,7 @@ services:
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
       - HYGIEIA_API_PORT=http://hygieia-api:8080
-    restart: always
+    restart: never
 
   hyson:
     image: devopsopen/docker-cov-hyson
@@ -215,7 +215,7 @@ services:
       #- SONAR_METRICS=
       #- SONAR_USERNAME=
       #- SONAR_PASSWORD=
-    restart: always
+    restart: never
 
   hyjen:
     image: devopsopen/docker-cov-hyjen
@@ -237,7 +237,7 @@ services:
       #- JENKINS_USERNAME=
       #- JENKINS_API_KEY=
       #- DOCKER_LOCALHOST=
-    restart: always
+    restart: never
 
   hysvn:
     image: devopsopen/docker-cov-hysvn
@@ -257,7 +257,7 @@ services:
       #- SUBVERSION_USERNAME=
       #- SUBVERSION_PASSWORD=
       #- SUBVERSION_COMMIT_THRESHOLD_DAYS=
-    restart: always
+    restart: never
 
   hygit:
     image: devopsopen/docker-cov-hygit
@@ -276,4 +276,4 @@ services:
       #- GITHUB_CRON=
       #- GITHUB_HOST=
       #- GITHUB_COMMIT_THRESHOLD_DAYS=
-    restart: always
+    restart: never
