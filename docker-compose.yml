@@ -11,9 +11,9 @@ services:
       - /etc/gitlab
       - /var/opt/gitlab
       - /var/log/gitlab
-      # for Jira
-      - /var/atlassian/jira
-      - /opt/atlassian/jira/logs
+      ## for Jira
+      #- /var/atlassian/jira
+      #- /opt/atlassian/jira/logs
       # for sonarqube
       - /opt/sonarqube/data
       - /opt/sonarqube/extensions
@@ -75,8 +75,9 @@ services:
       - "9090:80"
     links:
       - mongo:db
-    volumes_from:
-      - databox
+    volumes:
+      - /var/atlassian/jira
+      - /opt/atlassian/jira/logs
     environment:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
