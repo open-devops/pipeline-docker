@@ -75,9 +75,6 @@ services:
       - "9090:80"
     links:
       - mongo:db
-    volumes:
-      - /var/atlassian/jira
-      - /opt/atlassian/jira/logs
     environment:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
@@ -91,8 +88,9 @@ services:
     image: devopsopen/docker-ca-jira
     ports:
       - "9091:8080"
-    volumes_from:
-      - databox
+    volumes:
+      - /var/atlassian/jira
+      - /opt/atlassian/jira/logs
     environment:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
