@@ -144,7 +144,7 @@ services:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
-      - PORTAL_LOCALHOST="${PORTAL_LOCALHOST}"
+      - PORTAL_LOCALHOST=${PORTAL_LOCALHOST}
     restart: never
 
   # container resource monitor
