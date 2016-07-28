@@ -12,7 +12,7 @@ cd pipeline-docker; sh pipeline init
 ```
 
 #pipeline start up
-export PORTAL_LOCALHOST=your.host.ip.inf
+export PORTAL_LOCALHOST=your.host.ip.inf  
 for example : export PORTAL_LOCALHOST=16.187.145.11
 ```
 sh pipeline up
