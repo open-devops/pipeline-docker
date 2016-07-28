@@ -126,6 +126,7 @@ services:
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
+      - DOCKER_HOST="tcp://${PORTAL_LOCALHOST}:2376"
       #- SONAR_VERSION=5.6
       - SONARQUBE_HOME=/opt/sonarqube
       - SONARQUBE_JDBC_USERNAME=sonar
