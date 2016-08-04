@@ -202,7 +202,7 @@ fi
 date
 if [ _"init" = _"${action}" ]; then
   echo "##  pipeline init will pull latest images from devopsopen of dockhub"
-  for image in ci-jenkins com-mongo cq-sonarqube ca-wekan ca-jira scm-artifactory \
+  for image in base pipeline-portal ci-jenkins com-mongo cq-sonarqube ca-wekan ca-jira scm-artifactory \
       scm-gitlab cov-cadvisor cov-hyapi cov-hygui cov-hyson cov-hyjen cov-hysvn cov-hygit
   do
     pull_docker_image devopsopen/docker-${image} &
@@ -216,7 +216,7 @@ if [ _"init" = _"${action}" ]; then
   tbl_set_size 50 10 15 15
   tbl_set_title IMAGE TAG IMAGE_ID SIZE
   tbl_print_title
-  for image in ci-jenkins com-mongo cq-sonarqube ca-wekan ca-jira scm-artifactory \
+  for image in base pipeline-portal ci-jenkins com-mongo cq-sonarqube ca-wekan ca-jira scm-artifactory \
       scm-gitlab cov-cadvisor cov-hyapi cov-hygui cov-hyson cov-hyjen cov-hysvn cov-hygit
   do
     show_docker_image devopsopen/docker-${image}
