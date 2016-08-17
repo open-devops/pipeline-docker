@@ -1,0 +1,26 @@
+---
+jenkins_dest: /var/jenkins_home
+jenkins_local_url: "http://localhost:8080/"
+
+cli_dest: "{{ jenkins_dest }}/jenkins-cli.jar"
+jenkins_cli_cmd: "java -jar {{ cli_dest }} -s {{ jenkins_local_url }}"
+#jenkins_admin_user: "admin"
+#jenkins_admin_password: "1Qaz2wsx"
+jenkins_accounts :
+     - user      : "admin01"
+       password  : "admin01"
+
+     - user      : "admin02"
+       password  : "admin02"
+
+plugins:
+   - 'sonar'
+   - 'gitlab-plugin'
+   - 'workflow-aggregator'
+
+jenkins_jobs:
+   - name: ansible-jenkins-job1
+   - name: ansible-jenkins-job2
+     repo: https://github.com/klen/mixer
+     branch: origin/develop
+     command: make test

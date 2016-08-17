@@ -1,0 +1,18 @@
+---
+# Install cli for jenkins.
+- include: cli.yml
+
+- name: "Create custom init scripts directory.{{ jenkins_dest }}/script"
+  file:
+    path: "{{ jenkins_dest }}/script"
+    state: directory
+    owner: jenkins
+    group: jenkins
+    mode: 0775
+
+
+# Create Users
+- include: users.yml
+
+# Install Jobs
+- include: jobs.yml

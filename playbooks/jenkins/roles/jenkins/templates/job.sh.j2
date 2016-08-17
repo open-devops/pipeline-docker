@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export JOB="$1"
+export CLI="{{ jenkins_cli_cmd }}"
+[ -z "$JOB" ] && exit 1
+[ -d "{{jenkins_dest}}/jobs/$JOB" ] || $CLI create-job $JOB < {{jenkins_dest}}/jobs/${JOB}.xml
