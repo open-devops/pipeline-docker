@@ -1,0 +1,66 @@
+---
+# - name: projects | Install git
+#   apt:
+#     name="git-{{ sonar_git_version }}"
+#   when: ansible_os_family == "DEBIAN"
+
+# - name: projects | Install git
+#   yum:
+#     name="git-{{ sonar_git_version }}"
+#   when: ansible_os_family == "REDHAT"
+
+# - name: projects | Create project directory
+#   become: yes
+#   file:
+#     dest="{{ sonar_analyzer_runner_dir }}"
+#     state=directory
+#     owner="{{ sonar_owner }}"
+#     group="{{ sonar_group }}"
+
+# - name: projects | Create project directory
+#   # become: yes
+#   file:
+#     dest="{{ sonar_projects_base }}"
+#     state=directory
+#     owner="{{ sonar_owner }}"
+#     group="{{ sonar_group }}"
+
+# - name: projects | Get All projects from git
+#   git:
+#      repo="{{ item.git }}"
+#      dest="{{ sonar_projects_base }}/{{ item.name }}"
+#      version="{{ item.version }}"
+#   with_items: sonar_projects
+#   become_user: "{{ sonar_owner }}"
+#   when: sonar_projects | count > 0
+
+- name: projects | Create project
+  uri:
+    url: "http://{{sonar_listen_ip}}:{{sonar_port}}/api/projects/create"
+    method: POST
+    user: "{{sonar_admin}}"
+    password: "{{sonar_admin_password}}"
+    body: "{'key':{{ item.key }},'name':{{ item.name }}}"
+    status_code: 200
+    body_format: json
+    force_basic_auth: yes
+  with_items: sonar_projects
+  become_user: "{{ sonar_owner }}"
+  when: sonar_projects | count > 0
+
+- name: projects | Apply template to project
+  uri:
+    url: "http://{{sonar_listen_ip}}:{{sonar_port}}/api/permissions/apply_template"
+    method: POST
+    user: "{{sonar_admin}}"
+    password: "{{sonar_admin_password}}"
+    body: "{'projectKey':{{ item.projectKey }},'templateName':{{ item.templateName }}}"
+    status_code: 200
+    body_format: json
+    force_basic_auth: yes
+  with_items: sonar_template_2_project
+  become_user: "{{ sonar_owner }}"
+  when: sonar_template_2_project | count > 0
+
+
+  #JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")

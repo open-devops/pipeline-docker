@@ -1,0 +1,32 @@
+---
+
+
+- name: permission_templates | Create permission templates
+  uri:
+    url: "http://{{sonar_listen_ip}}:{{sonar_port}}/api/permissions/create_template"
+    method: POST
+    user: "{{sonar_admin}}"
+    password: "{{sonar_admin_password}}"
+    body: "{'name':{{ item.name }},'description':{{ item.description }},'projectKeyPattern':{{ item.projectKeyPattern }}}"
+    status_code: 200
+    body_format: json
+    force_basic_auth: yes
+  with_items: permission_templates
+  become_user: "{{ sonar_owner }}"
+  when: permission_templates | count > 0
+
+- name: group_2_template | Create permission templates
+  uri:
+    url: "http://{{sonar_listen_ip}}:{{sonar_port}}/api/permissions/add_group_to_template"
+    method: POST
+    user: "{{sonar_admin}}"
+    password: "{{sonar_admin_password}}"
+    body: "{'permission':{{ item.permission }},'templateName':{{ item.templateName }},'groupName':{{ item.groupName }}}"
+    status_code: 200
+    body_format: json
+    force_basic_auth: yes
+  with_items: group_2_template
+  become_user: "{{ sonar_owner }}"
+  when: group_2_template | count > 0
+
+

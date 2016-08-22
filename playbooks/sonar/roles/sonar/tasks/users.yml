@@ -1,0 +1,17 @@
+---
+
+
+- name: users | Create users
+  uri:
+    url: "http://{{sonar_listen_ip}}:{{sonar_port}}/api/users/create"
+    method: POST
+    user: "{{sonar_admin}}"
+    password: "{{sonar_admin_password}}"
+    body: "{'login':{{ item.login }},'password':{{ item.password }},'password_confirmation':{{ item.password_confirmation }},'name':{{ item.name }},'email':{{ item.email }}}"
+    status_code: 200
+    body_format: json
+    force_basic_auth: yes
+  with_items: sonar_users
+  become_user: "{{ sonar_owner }}"
+  when: sonar_users | count > 0
+

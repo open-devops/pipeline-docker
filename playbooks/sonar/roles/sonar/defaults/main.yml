@@ -1,0 +1,229 @@
+---
+
+sonar_major                              : "3"
+sonar_minor                              : "7.4"
+sonar_listen_ip                          : "16.187.145.11"
+sonar_port                               : "9000"
+sonar_admin                              : "admin"
+sonar_admin_password                     : "admin"
+
+# JDBC Setting
+#postgres
+#sonar_jdbc_driver                        : "h2" # postgres, h2 or mysql
+#sonar_jdbc_host                          : "127.0.0.1"
+#sonar_jdbc_port                          : 9092 # h2 default is 9092 postgresql 5432 and mysql is 3306
+#sonar_jdbc_user                          : "sonar"
+#sonar_jdbc_pass                          : "rN88HJkB"
+#sonar_jdbc_db                            : sonar
+#sonar_psql_schema                        : sonar ## PostgreSQL account has permissions to access multiple schemas (check documentation)
+#sonar_postgres_sudo_user                 : postgres
+#mysql
+sonar_jdbc_driver                        : "mysql" # postgres, h2 or mysql
+sonar_jdbc_host                          : "127.0.0.1"
+sonar_jdbc_port                          : 3306 # h2 default is 9092 postgresql 5432 and mysql is 3306
+sonar_jdbc_user                          : "pladmin"
+sonar_jdbc_pass                          : "pladmin"
+sonar_jdbc_db                            : sonar
+sonar_mysql_sudo_user                    : mysql
+sonar_login_user                         : "pladmin"
+sonar_login_password                     : "pladmin"
+sonar_mysql_allowed_hosts:
+  - 127.0.0.1
+  - ::1
+  - localhost
+
+## Where to install sonar and Unix user/group
+sonar_owner                              : "root"
+sonar_group                              : "root"
+sonar_shell                              : "/bin/bash"
+sonar_base_dir                           : "/opt/sonarqube"
+
+## JDBC extra option
+sonar_jdbc_maxActive                     : 20
+sonar_jdbc_maxIdle                       : 5
+sonar_jdbc_minIdle                       : 2
+sonar_jdbc_maxWait                       : 5000
+sonar_jdbc_minEvictableIdleTimeMillis    : 600000
+sonar_jdbc_timeBetweenEvictionRunsMillis : 30000
+
+## Postgresql user/db install
+sonar_postgres_install                   : False ## By default dont install postgresql
+## Mysql user/db install
+sonar_mysql_install                      : False ## By default dont install mysql
+
+## Sonar install
+sonar_install                            : False
+
+## Sonar configure
+sonar_config                             : False
+
+## Analyzer (non mavin) SonarQube Runner (plugins)
+sonar_analyzer_runner_install            : False
+sonar_analyzer_runner_version            : "2.3"
+sonar_analyzer_runner_dir                : "{{sonar_base_dir}}/sonar-runner-{{sonar_analyzer_runner_version}}"
+sonar_analyzer_runner_file               : "sonar-runner-dist-{{sonar_analyzer_runner_version}}.zip"
+sonar_analyzer_runner_url                : "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/{{sonar_analyzer_runner_version}}/{{sonar_analyzer_runner_file}}"
+sonar_analyzer_runner_host_connect       : "127.0.0.1"
+
+## Maven
+maven_install                            : False
+maven_version_major                      : '3' # Maven major version number
+maven_version_minor                      : '2' # Maven minor version number
+maven_version_patch                      : '1' # Maven patch version number
+maven_mirror                             : "http://archive.apache.org/dist/maven/maven-{{ maven_version|regex_replace('\\..*', '') }}/{{ maven_version }}/binaries"
+maven_redis_sha256sum                    : 'cdee2fd50b2b4e34e2d67d01ab2018b051542ee759c07354dd7aed6f4f71675c'
+maven_bin_path                           : '/usr/local/bin'
+maven_install_dir                        : '/opt/maven'
+maven_version                            : "{{ maven_version_major }}.{{ maven_version_minor }}.{{ maven_version_patch }}"
+maven_redis_filename                     : "apache-maven-{{ maven_version }}-bin.tar.gz"
+
+## sonar_users:
+sonar_users                              :
+    - login                 : "sonar_user_01"
+      password              : "sonar"
+      password_confirmation	: "sonar"
+      name                  : "sonar_user_name_01"
+      email                 : "sonar_user_01@devops.com"
+
+    - login                 : "sonar_user_02"
+      password              : "sonar"
+      password_confirmation	: "sonar"
+      name                  : "sonar_user_name_02"
+      email                 : "sonar_user_02@devops.com"
+
+## sonar_groups:
+sonar_groups               :
+    - name                 : "sonar_group_01"
+      description          : "sonar_group_description_01"
+
+    - name                 : "sonar_group_02"
+      description          : "sonar_group_description_02"
+
+## permission_templates
+permission_templates       :
+    - name                 : "permission_template_01"
+      description          : "permission_template_description_01"
+      projectKeyPattern    : ""
+
+    - name                 : "permission_template_02"
+      description          : "permission_template_description_02"
+      projectKeyPattern    : ""
+
+## group_2_template
+group_2_template           :
+    - permission           : "user" # Possible values for project permissions user, admin, issueadmin, codeviewer, scan
+      templateName         : "permission_template_01" # optional
+      groupName            : "sonar_group_01" # optional
+
+    - permission           : "admin" # Possible values for project permissions user, admin, issueadmin, codeviewer, scan
+      templateName         : "permission_template_01" # optional
+      groupName            : "sonar_group_01" # optional
+
+    - permission           : "issueadmin" # Possible values for project permissions user, admin, issueadmin, codeviewer, scan
+      templateName         : "permission_template_01" # optional
+      groupName            : "sonar_group_01" # optional
+
+    - permission           : "codeviewer" # Possible values for project permissions user, admin, issueadmin, codeviewer, scan
+      templateName         : "permission_template_01" # optional
+      groupName            : "sonar_group_01" # optional
+
+    - permission           : "scan" # Possible values for project permissions user, admin, issueadmin, codeviewer, scan
+      templateName         : "permission_template_01" # optional
+      groupName            : "sonar_group_01" # optional
+
+    - permission           : "user" # Possible values for project permissions user, admin, issueadmin, codeviewer, scan
+      templateName         : "permission_template_02" # optional
+      groupName            : "sonar_group_02" # optional
+
+## sonar_projects:
+sonar_projects_base                      : "{{sonar_base_dir}}/projects"
+
+
+sonar_projects                           :
+    - name                 : "sonar_example_01"
+      key                  : "sonar_example_01"
+      git                  : "https://github.com/SonarSource/sonar-examples.git"
+      version              : "master"
+      cron                 : ""
+
+    - name                 : "sonar_example_02"
+      key                  : "sonar_example_02"
+      git                  : "https://github.com/SonarSource/sonar-examples.git"
+      version              : "master"
+      cron                 : ""
+
+## sonar_template_2_project:
+sonar_template_2_project                           :
+    - projectKey           : "sonar_example_01"
+      templateName         : "permission_template_01"
+
+    - projectKey           : "sonar_example_02"
+      templateName         : "permission_template_02"
+
+## Sonar Standalone Mode
+# This mode will allow you to install with out checks so you can configure the system after a reboot
+sonar_standalone                         : false
+
+## Sonar plugins
+#
+sonar_java_plugin_version                : "3.4"
+sonar_plugins_install                        :
+    - "pylint"  ## pre dependency for python
+
+sonar_plugins                            :
+     - name  : "Java support"
+       url   : "http://sonarsource.bintray.com/Distribution/sonar-java-plugin/sonar-java-plugin-{{ sonar_java_plugin_version }}.jar"
+
+     - name  : "Git"
+       url   : "https://sonarsource.bintray.com/Distribution/sonar-scm-git-plugin/sonar-scm-git-plugin-1.2.jar"
+
+#    - name  : "Python Support"
+#      url   : "http://dist.sonarsource.com/oss/org/codehaus/sonar-plugins/python/sonar-python-plugin/1.1/sonar-python-plugin-1.1.jar"
+
+#    - name  : "Java script support"
+#      url   : "http://dist.sonarsource.com/oss/org/codehaus/sonar-plugins/javascript/sonar-javascript-plugin/1.6/sonar-javascript-plugin-1.6.jar"
+
+#    - name  : "Web HTML (included in HTML, JSP, JSF, Ruby, PHP, etc. pages"
+#      url   : "http://dist.sonarsource.com/oss/org/codehaus/sonar-plugins/sonar-web-plugin/2.1/sonar-web-plugin-2.1.jar"
+
+#    - name  : "XML support"
+#      url   : "http://dist.sonarsource.com/oss/org/codehaus/sonar-plugins/xml/sonar-xml-plugin/1.0.1/sonar-xml-plugin-1.0.1.jar"
+
+#    - name  : "German language"
+#      url   : "http://dist.sonarsource.com/oss/org/codehaus/sonar-plugins/l10n/sonar-l10n-de-plugin/1.0/sonar-l10n-de-plugin-1.0.jar"
+
+#    - name  : "Jira"
+#      url   : "http://dist.sonarsource.com/oss/org/codehaus/sonar-plugins/sonar-jira-plugin/1.2/sonar-jira-plugin-1.2.jar"
+
+
+## Most likely you dont need to edit
+sonar_service_state   : 'started'
+sonar_service_enabled : 'yes'
+sonar_version         : "{{sonar_major}}.{{sonar_minor}}"
+sonar_name            : "sonarqube"
+sonar_archive         : "sonar-{{sonar_version}}.zip"
+sonar_url             : "http://dist.sonar.codehaus.org/{{sonar_archive}}"
+sonar_home_dir        : "{{sonar_base_dir}}/{{sonar_name}}"
+sonar_conf_dir        : "{{sonar_home_dir}}/conf"
+sonar_bin_dir         : "{{sonar_home_dir}}/bin"
+sonar_webapp          : "{{sonar_home_dir}}/webapps"
+sonar_war_dir         : "{{sonar_home_dir}}/war/sonar-server/deploy/plugins/"
+sonar_ext_dir         : "{{sonar_home_dir}}/extensions/plugins/"
+
+sonar_supported_db    :
+   - postgresql
+   - h2
+   - tcp
+   - mysql
+
+sonar_restore_install : False ## By default dont install sonar from backup
+sonar_backup_temp_folder: "/tmp"
+sonar_remote_rsa: "/home/vagrant/.ssh/id_rsa" # RSA key used when sonar is created from backup
+sonar_remote_user: "{{ sonar_user }}"
+sonar_remote_backup_name: "sonar37"
+sonar_remote_backup_archive: "{{ sonar_remote_backup_name }}.sql.gz"
+sonar_remote_ip: "127.0.0.1"
+sonar_backup_number: 100
+
+sonar_git_version: 1.7
+sonar_unzip_version: 6.0

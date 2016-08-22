@@ -1,0 +1,25 @@
+---
+
+- name: Configure sonar server properties
+  become: yes
+  template:
+    src=sonar.conf.j2
+    dest="{{sonar_conf_dir}}/sonar.properties"
+  tags: sonar_config
+  notify: restart sonar
+
+# - name: Install sonar init script
+#   become: yes
+#   file:
+#     src="{{sonar_bin_dir}}/linux-x86-{{ansible_userspace_bits}}/run.sh"
+#     dest="/etc/init.d/sonar"
+#     state=link
+#     mode=0755
+#     owner="pladmin"
+#     group="root"
+#   tags: sonar_config
+
+- name: Ensure Sonar is running and set to start on boot.
+  service: name=sonar state=started enabled=yes
+  tags: sonar_config
+  when: not sonar_standalone | bool

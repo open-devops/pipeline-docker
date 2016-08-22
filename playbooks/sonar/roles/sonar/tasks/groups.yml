@@ -1,0 +1,16 @@
+---
+
+
+- name: groups | Create groups
+  uri:
+    url: "http://{{sonar_listen_ip}}:{{sonar_port}}/api/user_groups/create"
+    method: POST
+    user: "{{sonar_admin}}"
+    password: "{{sonar_admin_password}}"
+    body: "{'name':{{ item.name }},'description':{{ item.description }}}"
+    status_code: 200
+    body_format: json
+    force_basic_auth: yes
+  with_items: sonar_groups
+  become_user: "{{ sonar_owner }}"
+  when: sonar_groups | count > 0

@@ -1,0 +1,12 @@
+---
+- hosts: sonar_containers
+  connection: docker
+#  become: yes
+  roles:
+    - sonar
+
+  environment:
+    http_proxy: http://web-proxy.atl.hp.com:8080
+    https_proxy: http://web-proxy.atl.hp.com:8080
+
+#- include: ./integration-tests.yml

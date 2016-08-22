@@ -1,0 +1,24 @@
+---
+
+- name: plugins | Install pylint
+  apt:
+    name="{{item}}"
+  with_items: sonar_plugins_install
+  notify: restart sonar
+  when: "sonar_plugins_install is defined and sonar_plugins_install | count > 0 and ansible_os_family == 'DEBIAN'"
+
+- name: plugins | Install pylint
+  yum:
+    name="{{item}}"
+  with_items: sonar_plugins_install
+  notify: restart sonar
+  when: "sonar_plugins_install is defined and sonar_plugins_install | count > 0 and ansible_os_family == 'REDHAT'"
+
+- name: plugins | Download and install plugins
+  become: yes
+  get_url:
+    url="{{item.url}}"
+    dest="{{sonar_ext_dir}}"
+  with_items: sonar_plugins
+  become_user: "{{sonar_owner}}"
+  notify: restart sonar
