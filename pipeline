@@ -184,7 +184,7 @@ show_docker_image(){
 }
 
 usage(){
-  echo "Usage: $0 init|up|status|stop [capability]"
+  echo "Usage: $0 init|up|status|stop|config [capability]"
   echo "       capablity: jenkins|mongodb|mariadb"
   echo "                  sonarqube|gitlab|wekan"
   echo "                  jira|artifactory|hygieia"
@@ -232,6 +232,17 @@ elif [ _"status" = _"${action}" ]; then
   echo "## pipeline status"
 elif [ _"stop" = _"${action}" ]; then
   docker-compose ${action} ${capa}
+elif [ _"config" = _"${action}" ]; then
+  echo "## pipeline config(Jenkins)"
+  cd playbooks/jenkins
+  ansible-playbook jenkins_init.yml
+  echo "## pipeline config(Jenkins)"
+  echo
+  echo "## pipeline config(Sonarqube)"
+  cd ../..
+  cd playbooks/sonar
+  ansible-playbook sonar_init.yml
+  echo "## pipeline config(Sonarqube)" 
 else
   usage
   exit 1
