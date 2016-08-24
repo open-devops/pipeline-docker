@@ -8,8 +8,8 @@
     dest: "{{ jenkins_dest }}/script/addUsers.goorvy"
   register: jenkins_users_config
 
-#- name: add user
-#  command: > 
-#     {{ jenkins_cli_cmd }} groovy {{ jenkins_dest }}/script/addUsers.goorvy {{ item.user }} {{ item.password }}
-#  with_items: "{{jenkins_accounts}}"
-#  when: jenkins_accounts | count > 0
+- name: add user
+  command: > 
+     {{ jenkins_cli_cmd }} groovy {{ jenkins_dest }}/script/addUsers.goorvy {{ item.user }} {{ item.password }} --username {{ jenkins_admin_user }} --password {{ jenkins_admin_password }}
+  with_items: "{{jenkins_accounts}}"
+  when: jenkins_accounts | count > 0
