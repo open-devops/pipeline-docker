@@ -24,7 +24,6 @@ jenkins_jobs:
      repo: https://github.com/klen/mixer
      branch: origin/develop
      command: make test
-     
-#    - name: ansible-jenkins-pipJob
-#     script: xxxxxxxxx
-#     template: pipjob.xml.j2
+   - name: ansible-jenkins-pipJob
+     repoUrl: https://jenkinsFile/repo.git
+     template: pipjob.xml.j2
