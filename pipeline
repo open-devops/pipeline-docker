@@ -221,7 +221,21 @@ if [ _"init" = _"${action}" ]; then
   do
     show_docker_image devopsopen/docker-${image}
   done
+elif [ _"start" = _"${action}" ]; then
+  #temporary
+  if [ _"jenkins" = _"${capa}" ]; then
+    capa="cap_ci"
+  elif [ _"sonarqube" = _"${capa}" ]; then
+    capa="cap_cq"
+  fi
+  docker-compose ${action} ${capa}
 elif [ _"up" = _"${action}" ]; then
+  #temporary
+  if [ _"jenkins" = _"${capa}" ]; then
+    capa="cap_ci"
+  elif [ _"sonarqube" = _"${capa}" ]; then
+    capa="cap_cq"
+  fi
   docker-compose ${action} ${capa} >${TEMP_LOG_FILE} 2>&1 &
   sleep 3
   echo "Capabilities may needs a little until running complete, please check log for detail"
@@ -231,6 +245,12 @@ elif [ _"status" = _"${action}" ]; then
   docker-compose ps
   echo "## pipeline status"
 elif [ _"stop" = _"${action}" ]; then
+  #temporary
+  if [ _"jenkins" = _"${capa}" ]; then
+    capa="cap_ci"
+  elif [ _"sonarqube" = _"${capa}" ]; then
+    capa="cap_cq"
+  fi
   docker-compose ${action} ${capa}
 elif [ _"config" = _"${action}" ]; then
   if [ _"all" = _"${capa}" -o _"" = _"${capa}" -o _"jenkins" = _"${capa}" ]; then
