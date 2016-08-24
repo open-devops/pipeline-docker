@@ -108,7 +108,7 @@ services:
     expose:
       - "5000"
     environment:
-      - JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+      - JAVA_OPTS="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dhttp.proxyHost=${http_proxy_host} -Dhttp.proxyPort=${http_proxy_port} -Dhttps.proxyHost=${https_proxy_host} -Dhttps.proxyPort=${https_proxy_port}"
       - http_proxy="${http_proxy}"
       - https_proxy="${https_proxy}"
       - no_proxy="${no_proxy}"
