@@ -4,8 +4,8 @@ jenkins_local_url: "http://localhost:8080/"
 
 cli_dest: "{{ jenkins_dest }}/jenkins-cli.jar"
 jenkins_cli_cmd: "java -jar {{ cli_dest }} -s {{ jenkins_local_url }}"
-#jenkins_admin_user: "admin"
-#jenkins_admin_password: "1Qaz2wsx"
+jenkins_admin_user: "admin"
+jenkins_admin_password: "1Qaz2wsx"
 jenkins_accounts :
      - user      : "admin01"
        password  : "admin01"
@@ -24,3 +24,7 @@ jenkins_jobs:
      repo: https://github.com/klen/mixer
      branch: origin/develop
      command: make test
+     
+#    - name: ansible-jenkins-pipJob
+#     script: xxxxxxxxx
+#     template: pipjob.xml.j2
