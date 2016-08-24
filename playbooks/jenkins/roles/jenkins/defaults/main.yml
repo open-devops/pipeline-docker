@@ -20,10 +20,13 @@ plugins:
 
 jenkins_jobs:
    - name: ansible-jenkins-job1
+     description: "this is a freeStyle job"
    - name: ansible-jenkins-job2
+     description: "this is a freeStyle job"
      repo: https://github.com/klen/mixer
      branch: origin/develop
      command: make test
    - name: ansible-jenkins-pipJob
+     description: "this is a PIPEline job"
      repoUrl: https://jenkinsFile/repo.git
      template: pipjob.xml.j2
