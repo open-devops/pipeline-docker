@@ -223,7 +223,7 @@ if [ _"init" = _"${action}" ]; then
     show_docker_image devopsopen/docker-${image}
   done
 elif [ _"up" = _"${action}" ]; then
-  if [ _"all" = _"${service}" -o _"" = _"${service}" ] then
+  if [ _"all" = _"${service}" -o _"" = _"${service}" ]; then
      docker-compose ${action} ${capa} >${TEMP_LOG_FILE} 2>&1 &
   else
      docker-compose ${action} ${capa} ${service} >${TEMP_LOG_FILE} 2>&1 &
@@ -236,20 +236,20 @@ elif [ _"status" = _"${action}" ]; then
   docker-compose ps
   echo "## pipeline status"
 elif [ _"stop" = _"${action}" ]; then
-  if [ _"all" = _"${service}" -o _"" = _"${service}" ] then
+  if [ _"all" = _"${service}" -o _"" = _"${service}" ]; then
     docker-compose ${action} ${capa}
   else
     docker-compose ${action} ${capa} ${service}
   fi
 elif [ _"config" = _"${action}" ]; then
-  if [ _"all" = _"${service}" -o _"" = _"${service}" -o _"jenkins" = _"${service}" ] then
+  if [ _"all" = _"${service}" -o _"" = _"${service}" -o _"jenkins" = _"${service}" ]; then
     echo "## pipeline config(Jenkins)"
     cd playbooks/jenkins
     ansible-playbook jenkins_init.yml
     echo "## pipeline config(Jenkins)"
     echo
   fi
-  if [ _"all" = _"${service}" -o _"" = _"${service}" -o _"sonarqube" = _"${service}" ] then
+  if [ _"all" = _"${service}" -o _"" = _"${service}" -o _"sonarqube" = _"${service}" ]; then
     echo "## pipeline config(Sonarqube)"
     cd ../..
     cd playbooks/sonar
