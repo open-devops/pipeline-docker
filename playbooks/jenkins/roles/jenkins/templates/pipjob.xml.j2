@@ -1,11 +1,32 @@
 <?xml version='1.0' encoding='UTF-8'?>
 {%- set job = item -%}
 <flow-definition plugin="workflow-job@2.5">
+  <actions/>
   <description>{{ job.description|default("") }}</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-      <triggers/>
+      <triggers>
+        <com.dabsquared.gitlabjenkins.GitLabPushTrigger plugin="gitlab-plugin@1.3.0">
+          <spec></spec>
+          <triggerOnPush>true</triggerOnPush>
+          <triggerOnMergeRequest>true</triggerOnMergeRequest>
+          <triggerOpenMergeRequestOnPush>never</triggerOpenMergeRequestOnPush>
+          <triggerOnNoteRequest>true</triggerOnNoteRequest>
+          <noteRegex>Jenkins please retry a build</noteRegex>
+          <ciSkip>true</ciSkip>
+          <skipWorkInProgressMergeRequest>true</skipWorkInProgressMergeRequest>
+          <setBuildDescription>true</setBuildDescription>
+          <addNoteOnMergeRequest>true</addNoteOnMergeRequest>
+          <addCiMessage>false</addCiMessage>
+          <addVoteOnMergeRequest>true</addVoteOnMergeRequest>
+          <branchFilterType>All</branchFilterType>
+          <includeBranchesSpec></includeBranchesSpec>
+          <excludeBranchesSpec></excludeBranchesSpec>
+          <targetBranchRegex></targetBranchRegex>
+          <acceptMergeRequestOnSuccess>false</acceptMergeRequestOnSuccess>
+        </com.dabsquared.gitlabjenkins.GitLabPushTrigger>
+      </triggers>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
     <com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty plugin="gitlab-plugin@1.3.0">
       <gitLabConnection></gitLabConnection>
