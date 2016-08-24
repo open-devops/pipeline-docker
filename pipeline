@@ -193,7 +193,6 @@ usage(){
 
 action="$1"
 capa="$2"
-service="$3"
 
 if [ $# -lt 1 ]; then
   usage
@@ -223,11 +222,7 @@ if [ _"init" = _"${action}" ]; then
     show_docker_image devopsopen/docker-${image}
   done
 elif [ _"up" = _"${action}" ]; then
-  if [ _"all" = _"${service}" -o _"" = _"${service}" ]; then
-     docker-compose ${action} ${capa} >${TEMP_LOG_FILE} 2>&1 &
-  else
-     docker-compose ${action} ${capa} ${service} >${TEMP_LOG_FILE} 2>&1 &
-  fi
+  docker-compose ${action} ${capa} >${TEMP_LOG_FILE} 2>&1 &
   sleep 3
   echo "Capabilities may needs a little until running complete, please check log for detail"
   show_log_info ${TEMP_LOG_FILE}
@@ -236,25 +231,22 @@ elif [ _"status" = _"${action}" ]; then
   docker-compose ps
   echo "## pipeline status"
 elif [ _"stop" = _"${action}" ]; then
-  if [ _"all" = _"${service}" -o _"" = _"${service}" ]; then
-    docker-compose ${action} ${capa}
-  else
-    docker-compose ${action} ${capa} ${service}
-  fi
+  docker-compose ${action} ${capa}
 elif [ _"config" = _"${action}" ]; then
-  if [ _"all" = _"${service}" -o _"" = _"${service}" -o _"jenkins" = _"${service}" ]; then
+  if [ _"all" = _"${capa}" -o _"" = _"${capa}" -o _"jenkins" = _"${capa}" ]; then
     echo "## pipeline config(Jenkins)"
     cd playbooks/jenkins
     ansible-playbook jenkins_init.yml
     echo "## pipeline config(Jenkins)"
+    cd ../..
     echo
   fi
-  if [ _"all" = _"${service}" -o _"" = _"${service}" -o _"sonarqube" = _"${service}" ]; then
+  if [ _"all" = _"${capa}" -o _"" = _"${capa}" -o _"sonarqube" = _"${capa}" ]; then
     echo "## pipeline config(Sonarqube)"
-    cd ../..
     cd playbooks/sonar
     ansible-playbook sonar_init.yml
-    echo "## pipeline config(Sonarqube)" 
+    echo "## pipeline config(Sonarqube)"
+    cd ../..
     echo
   fi
 else
