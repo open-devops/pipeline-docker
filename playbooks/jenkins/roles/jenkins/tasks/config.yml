@@ -8,5 +8,7 @@
 
 - name: Configure sonarqube 
   template: src=jenkins_system_config_sonarqube.xml.j2 dest={{ jenkins_dest }}/hudson.plugins.sonar.SonarGlobalConfiguration.xml owner=jenkins group=jenkins force=yes
-  
-  
+
+- name: Reload Jenkins
+  command: >
+     {{ jenkins_cli_cmd }} reload-configuration --username {{ jenkins_admin_user }} --password {{ jenkins_admin_password }}
