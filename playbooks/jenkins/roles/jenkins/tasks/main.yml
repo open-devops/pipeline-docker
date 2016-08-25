@@ -18,3 +18,7 @@
 
 # Install Jobs
 - include: jobs.yml
+
+- name: restart Jenkins
+  command: >
+     {{ jenkins_cli_cmd }} restart --username {{ jenkins_admin_user }} --password {{ jenkins_admin_password }}
