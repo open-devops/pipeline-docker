@@ -1,1 +1,6 @@
+---
+
+- name: Configure Jenkins 
+  template: src=jenkins_system_config_jenkins.xml.j2 dest={{ jenkins_dest }}/jenkins.model.JenkinsLocationConfiguration.xml owner=jenkins group=jenkins force=yes
+
 
