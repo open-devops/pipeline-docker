@@ -11,4 +11,4 @@
 #  delay: 10
 
 - name: Get Jenkins CLI
-  command: "cp {{jenkins_dest}}war/WEB-INF/jenkins-cli.jar {{jenkins_dest}}"
+  command: "cp {{jenkins_dest}}/war/WEB-INF/jenkins-cli.jar {{jenkins_dest}}"
