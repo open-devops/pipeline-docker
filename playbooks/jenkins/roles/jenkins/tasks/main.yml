@@ -1,6 +1,8 @@
 ---
-# Install cli for jenkins.
+
 - include: cli.yml
+
+- include: config.yml
 
 - name: "Create custom init scripts directory.{{ jenkins_dest }}/script"
   file:
