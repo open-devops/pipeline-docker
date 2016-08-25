@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.sonar.SonarGlobalConfiguration plugin="sonar@2.4.4">
+  <installations>
+    <hudson.plugins.sonar.SonarInstallation>
+      <name>{{jenkins_sonarqube_name}}</name>
+      <serverUrl>{{jenkins_sonarqube_url}}</serverUrl>
+      <serverVersion>5.3</serverVersion>
+      <serverAuthenticationToken></serverAuthenticationToken>
+      <mojoVersion></mojoVersion>
+      <databaseUrl></databaseUrl>
+      <databaseLogin></databaseLogin>
+      <additionalProperties></additionalProperties>
+      <additionalAnalysisProperties></additionalAnalysisProperties>
+      <triggers>
+        <skipScmCause>false</skipScmCause>
+        <skipUpstreamCause>false</skipUpstreamCause>
+        <envVar></envVar>
+      </triggers>
+      <sonarLogin></sonarLogin>
+      <databaseSecret>X9wKLMoy6kG0Lf9yZOO9Lg==</databaseSecret>
+      <sonarSecret>X9wKLMoy6kG0Lf9yZOO9Lg==</sonarSecret>
+    </hudson.plugins.sonar.SonarInstallation>
+  </installations>
+  <buildWrapperEnabled>true</buildWrapperEnabled>
+</hudson.plugins.sonar.SonarGlobalConfiguration>
