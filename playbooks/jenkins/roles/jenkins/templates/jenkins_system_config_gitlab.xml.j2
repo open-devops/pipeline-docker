@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig plugin="gitlab-plugin@1.3.0">
+  <useAuthenticatedEndpoint>false</useAuthenticatedEndpoint>
+  <connections>
+    <com.dabsquared.gitlabjenkins.connection.GitLabConnection>
+      <name>{{jenkins_gitlab_name}}</name>
+      <url>{{jenkins_gitlab_url}}</url>
+      <apiTokenId></apiTokenId>
+      <ignoreCertificateErrors>false</ignoreCertificateErrors>
+      <connectionTimeout>10</connectionTimeout>
+      <readTimeout>10</readTimeout>
+    </com.dabsquared.gitlabjenkins.connection.GitLabConnection>
+  </connections>
+</com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig>
