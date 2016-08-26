@@ -276,3 +276,19 @@ services:
       #- GITHUB_HOST=
       #- GITHUB_COMMIT_THRESHOLD_DAYS=
     restart: never
+    
+  hyk8s:
+    image: devopsopen/docker-cov-hyk8s
+    links:
+      - mongo:mongo
+    environment:
+      - http_proxy="${http_proxy}"
+      - https_proxy="${https_proxy}"
+      - no_proxy="${no_proxy}"
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=dashboard
+      - SPRING_DATA_MONGODB_USERNAME=db
+      - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      - MONGO_PORT=http://mongo:27017
+    restart: never
