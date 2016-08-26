@@ -291,4 +291,5 @@ services:
       - SPRING_DATA_MONGODB_USERNAME=db
       - SPRING_DATA_MONGODB_PASSWORD=dbpass
       - MONGO_PORT=http://mongo:27017
+      - KUBERNETES_URL=${PIPELINE_KUBERNETES_URL}
     restart: never
