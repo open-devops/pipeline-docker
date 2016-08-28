@@ -32,9 +32,9 @@ services:
     volumes_from:
       - databox
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       #- MONGO_MAJOR=3.3
       #- MONGO_VERSION=3.3.10
     restart: never
@@ -50,9 +50,9 @@ services:
     volumes_from:
       - databox
     #environment:
-      #- http_proxy="${http_proxy}"
-      #- https_proxy="${https_proxy}"
-      #- no_proxy="${no_proxy}"
+      #- http_proxy=${http_proxy}
+      #- https_proxy=${https_proxy}
+      #- no_proxy=${no_proxy}
     restart: never
 
   # configuration management: artifactory
@@ -61,9 +61,9 @@ services:
     ports:
       - "9011:8081"
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       #- ARTIFACTORY_VERSION=4.9.0
       - ARTIFACTORY_HOME=/opt/artifactory
     restart: never
@@ -76,9 +76,9 @@ services:
     links:
       - mongo:db
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - MONGO_URL=mongodb://db
       - ROOT_URL=http://127.0.0.1
     restart: never
@@ -92,9 +92,9 @@ services:
       - /var/atlassian/jira
       - /opt/atlassian/jira/logs
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - JIRA_HOME=/var/atlassian/jira
       - JIRA_INSTALL=/opt/atlassian/jira
       #- JIRA_VERSION=7.1.9
@@ -109,9 +109,9 @@ services:
       - "5000"
     environment:
       - JAVA_OPTS="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dhttp.proxyHost=${http_proxy_host} -Dhttp.proxyPort=${http_proxy_port} -Dhttps.proxyHost=${https_proxy_host} -Dhttps.proxyPort=${https_proxy_port}"
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
     restart: never
 
   # continous quality assurance
@@ -124,9 +124,9 @@ services:
     volumes_from:
       - databox
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - DOCKER_HOST="tcp://${PORTAL_LOCALHOST}:2376"
       #- SONAR_VERSION=5.6
       - SONARQUBE_HOME=/opt/sonarqube
@@ -143,9 +143,9 @@ services:
     volumes_from:
       - databox
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - PORTAL_LOCALHOST=${PORTAL_LOCALHOST}
     restart: never
 
@@ -155,9 +155,9 @@ services:
     ports:
       - "9998:8080"
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
     restart: never
 
   # hygieia : monitor
@@ -170,9 +170,9 @@ services:
     links:
       - mongo:mongo
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=dashboard
@@ -187,9 +187,9 @@ services:
     links:
       - hyapi:hygieia-api
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - HYGIEIA_API_PORT=http://hygieia-api:8080
     restart: never
 
@@ -199,9 +199,9 @@ services:
       - mongo:mongo
       - cap_cq
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=dashboard
@@ -221,9 +221,9 @@ services:
       - mongo:mongo
       - cap_ci
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=dashboard
@@ -243,9 +243,9 @@ services:
     links:
       - mongo:mongo
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=dashboard
@@ -263,9 +263,9 @@ services:
     links:
       - mongo:mongo
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=dashboard
@@ -282,9 +282,9 @@ services:
     links:
       - mongo:mongo
     environment:
-      - http_proxy="${http_proxy}"
-      - https_proxy="${https_proxy}"
-      - no_proxy="${no_proxy}"
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=dashboard
