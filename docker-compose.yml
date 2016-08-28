@@ -32,15 +32,11 @@ services:
     volumes_from:
       - databox
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      #- MONGO_MAJOR=3.3
-      #- MONGO_VERSION=3.3.10
+      - ./opendevops_pipeline.env
     restart: never
 
   # source configuration management: gitlab
-  cap_scm:
+  gitlab:
     image: devopsopen/docker-scm-gitlab
     ports:
       - "9010:80"
@@ -49,10 +45,8 @@ services:
       - "22"
     volumes_from:
       - databox
-    #environment:
-      #- http_proxy=${http_proxy}
-      #- https_proxy=${https_proxy}
-      #- no_proxy=${no_proxy}
+    environment:
+      - ./opendevops_pipeline.env
     restart: never
 
   # configuration management: artifactory
@@ -61,26 +55,18 @@ services:
     ports:
       - "9011:8081"
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      #- ARTIFACTORY_VERSION=4.9.0
-      - ARTIFACTORY_HOME=/opt/artifactory
+      - ./opendevops_pipeline.env
     restart: never
 
   # continous assesement : wekan
-  cap_ca:
+  wekan:
     image: devopsopen/docker-ca-wekan
     ports:
       - "9090:80"
     links:
       - mongo:db
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - MONGO_URL=mongodb://db
-      - ROOT_URL=http://127.0.0.1
+      - ./opendevops_pipeline.env
     restart: never
 
   # continous assesement : Jira
@@ -92,30 +78,22 @@ services:
       - /var/atlassian/jira
       - /opt/atlassian/jira/logs
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - JIRA_HOME=/var/atlassian/jira
-      - JIRA_INSTALL=/opt/atlassian/jira
-      #- JIRA_VERSION=7.1.9
+      - ./opendevops_pipeline.env
     restart: never
 
   # continous integration : jenkins
-  cap_ci:
+  jenkins:
     image: devopsopen/docker-ci-jenkins
     ports:
       - "9080:8080"
     expose:
       - "5000"
     environment:
-      - JAVA_OPTS="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dhttp.proxyHost=${http_proxy_host} -Dhttp.proxyPort=${http_proxy_port} -Dhttps.proxyHost=${https_proxy_host} -Dhttps.proxyPort=${https_proxy_port}"
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
+      - ./opendevops_pipeline.env
     restart: never
 
   # continous quality assurance
-  cap_cq:
+  sonarqube:
     image: devopsopen/docker-cq-sonarqube
     ports:
       - "9000:9000"
@@ -124,15 +102,7 @@ services:
     volumes_from:
       - databox
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - DOCKER_HOST="tcp://${PORTAL_LOCALHOST}:2376"
-      #- SONAR_VERSION=5.6
-      - SONARQUBE_HOME=/opt/sonarqube
-      - SONARQUBE_JDBC_USERNAME=sonar
-      - SONARQUBE_JDBC_PASSWORD=sonar
-      - SONARQUBE_JDBC_URL=
+      - ./opendevops_pipeline.env
     restart: never
 
   # devops pipeline portal
@@ -143,10 +113,7 @@ services:
     volumes_from:
       - databox
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - PORTAL_LOCALHOST=${PORTAL_LOCALHOST}
+      - ./opendevops_pipeline.env
     restart: never
 
   # container resource monitor
@@ -155,9 +122,7 @@ services:
     ports:
       - "9998:8080"
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
+      - ./opendevops_pipeline.env
     restart: never
 
   # hygieia : monitor
@@ -170,14 +135,7 @@ services:
     links:
       - mongo:mongo
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - SPRING_DATA_MONGODB_HOST=mongo
-      - SPRING_DATA_MONGODB_PORT=27017
-      - SPRING_DATA_MONGODB_DATABASE=dashboard
-      - SPRING_DATA_MONGODB_USERNAME=db
-      - SPRING_DATA_MONGODB_PASSWORD=dbpass
+      - ./opendevops_pipeline.env
     restart: never
 
   hygui:
@@ -187,55 +145,25 @@ services:
     links:
       - hyapi:hygieia-api
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - HYGIEIA_API_PORT=http://hygieia-api:8080
+      - ./opendevops_pipeline.env
     restart: never
 
   hyson:
     image: devopsopen/docker-cov-hyson
     links:
       - mongo:mongo
-      - cap_cq
+      - sonarqube
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - SPRING_DATA_MONGODB_HOST=mongo
-      - SPRING_DATA_MONGODB_PORT=27017
-      - SPRING_DATA_MONGODB_DATABASE=dashboard
-      - SPRING_DATA_MONGODB_USERNAME=db
-      - SPRING_DATA_MONGODB_PASSWORD=dbpass
-      - MONGO_PORT=http://mongo:27017
-      #- SONAR_CRON=
-      - SONAR_URL=http://cap_cq:9000
-      #- SONAR_METRICS=
-      #- SONAR_USERNAME=
-      #- SONAR_PASSWORD=
+      - ./opendevops_pipeline.env
     restart: never
 
   hyjen:
     image: devopsopen/docker-cov-hyjen
     links:
       - mongo:mongo
-      - cap_ci
+      - jenkins
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - SPRING_DATA_MONGODB_HOST=mongo
-      - SPRING_DATA_MONGODB_PORT=27017
-      - SPRING_DATA_MONGODB_DATABASE=dashboard
-      - SPRING_DATA_MONGODB_USERNAME=db
-      - SPRING_DATA_MONGODB_PASSWORD=dbpass
-      - MONGO_PORT=http://mongo:27017
-      #- JENKINS_CRON=
-      - JENKINS_MASTER=http://cap_ci:9080
-      #- JENKINS_SAVE_LOG=
-      #- JENKINS_USERNAME=
-      #- JENKINS_API_KEY=
-      #- DOCKER_LOCALHOST=
+      - ./opendevops_pipeline.env
     restart: never
 
   hysvn:
@@ -243,19 +171,7 @@ services:
     links:
       - mongo:mongo
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - SPRING_DATA_MONGODB_HOST=mongo
-      - SPRING_DATA_MONGODB_PORT=27017
-      - SPRING_DATA_MONGODB_DATABASE=dashboard
-      - SPRING_DATA_MONGODB_USERNAME=db
-      - SPRING_DATA_MONGODB_PASSWORD=dbpass
-      - MONGO_PORT=http://mongo:27017
-      #- SUBVERSION_CRON=
-      #- SUBVERSION_USERNAME=
-      #- SUBVERSION_PASSWORD=
-      #- SUBVERSION_COMMIT_THRESHOLD_DAYS=
+      - ./opendevops_pipeline.env
     restart: never
 
   hygit:
@@ -263,33 +179,13 @@ services:
     links:
       - mongo:mongo
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - SPRING_DATA_MONGODB_HOST=mongo
-      - SPRING_DATA_MONGODB_PORT=27017
-      - SPRING_DATA_MONGODB_DATABASE=dashboard
-      - SPRING_DATA_MONGODB_USERNAME=db
-      - SPRING_DATA_MONGODB_PASSWORD=dbpass
-      - MONGO_PORT=http://mongo:27017
-      #- GITHUB_CRON=
-      #- GITHUB_HOST=
-      #- GITHUB_COMMIT_THRESHOLD_DAYS=
+      - ./opendevops_pipeline.env
     restart: never
-    
+
   hyk8s:
     image: devopsopen/docker-cov-hyk8s
     links:
       - mongo:mongo
     environment:
-      - http_proxy=${http_proxy}
-      - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy}
-      - SPRING_DATA_MONGODB_HOST=mongo
-      - SPRING_DATA_MONGODB_PORT=27017
-      - SPRING_DATA_MONGODB_DATABASE=dashboard
-      - SPRING_DATA_MONGODB_USERNAME=db
-      - SPRING_DATA_MONGODB_PASSWORD=dbpass
-      - MONGO_PORT=http://mongo:27017
-      - KUBERNETES_URL=${PIPELINE_KUBERNETES_URL}
+      - ./opendevops_pipeline.env
     restart: never
