@@ -32,4 +32,4 @@ def addPassword = { username, new_password ->
     }
 }
 
-addPassword({{credential_user}}, {{credential_password}})
+addPassword("{{credential_user}}", "{{credential_password}}")
