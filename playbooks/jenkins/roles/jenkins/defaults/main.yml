@@ -31,7 +31,7 @@ jenkins_jobs:
      command: make test
    - name: ansible-jenkins-pipJob
      description: "this is a PIPEline job"
-     repoUrl: https://jenkinsFile/repo.git
+     repoUrl: http://16.187.145.11:9010/liuxiaomer1/OrganizationService
      template: pipjob.xml.j2
 
 jenkins_gitlab_name: ansible_git
