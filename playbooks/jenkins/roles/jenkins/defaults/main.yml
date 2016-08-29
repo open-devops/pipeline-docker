@@ -35,7 +35,7 @@ jenkins_jobs:
      template: pipjob.xml.j2
 
 jenkins_gitlab_name: ansible_git
-jenkins_gitlab_url: "http://ansible_git/sample"
+jenkins_gitlab_url: "http://16.187.145.11:9010/"
 jenkins_sonarqube_name: ansible_sonar
 jenkins_sonarqube_url: "http://ansible_sonar/sample"
     
