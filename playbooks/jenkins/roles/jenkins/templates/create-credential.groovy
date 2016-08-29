@@ -23,7 +23,7 @@ def addPassword = { username, new_password ->
 
         def result = credentials_store.addCredentials(
             com.cloudbees.plugins.credentials.domains.Domain.global(), 
-            new UsernamePasswordCredentialsImpl(scope, null, description, username, new_password)
+            new UsernamePasswordCredentialsImpl(scope, "{{credential_id}}", description, username, new_password)
             )
 
         if (result) {
