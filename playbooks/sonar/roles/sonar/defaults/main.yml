@@ -2,7 +2,7 @@
 
 sonar_major                              : "3"
 sonar_minor                              : "7.4"
-sonar_listen_ip                          : {{ lookup('env','PORTAL_LOCALHOST') }}
+sonar_listen_ip                          : lookup('env','PORTAL_LOCALHOST')
 sonar_port                               : "9000"
 sonar_admin                              : "admin"
 sonar_admin_password                     : "admin"
