@@ -1,5 +1,13 @@
 ---
+- name: Copy create-credential.groovy to jenkins
+  template:
+    src: create-credential.groovy
+    dest: "{{ jenkins_dest }}/script/create-credential.goorvy"
 
+- name: create credential
+  command: > 
+     {{ jenkins_cli_cmd }} groovy {{ jenkins_dest }}/script/create-credential.goorvy --username {{ jenkins_admin_user }} --password {{ jenkins_admin_password }}
+  
 - name: Configure Jenkins 
   template: src=jenkins_system_config_jenkins.xml.j2 dest={{ jenkins_dest }}/jenkins.model.JenkinsLocationConfiguration.xml owner=jenkins group=jenkins force=yes
 
