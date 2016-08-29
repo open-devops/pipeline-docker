@@ -1,4 +1,5 @@
 import com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl
+import com.cloudbees.plugins.credentials.CredentialsScope
 
 def addPassword = { username, new_password ->
     def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
