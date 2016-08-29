@@ -199,6 +199,8 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
+. ./opendevops_pipeline.env
+
 date
 if [ _"init" = _"${action}" ]; then
   echo "##  pipeline init will pull latest images from devopsopen of dockhub"
@@ -222,20 +224,8 @@ if [ _"init" = _"${action}" ]; then
     show_docker_image devopsopen/docker-${image}
   done
 elif [ _"start" = _"${action}" ]; then
-  #temporary
-  if [ _"jenkins" = _"${capa}" ]; then
-    capa="cap_ci"
-  elif [ _"sonarqube" = _"${capa}" ]; then
-    capa="cap_cq"
-  fi
   docker-compose ${action} ${capa}
 elif [ _"up" = _"${action}" ]; then
-  #temporary
-  if [ _"jenkins" = _"${capa}" ]; then
-    capa="cap_ci"
-  elif [ _"sonarqube" = _"${capa}" ]; then
-    capa="cap_cq"
-  fi
   docker-compose ${action} ${capa} >${TEMP_LOG_FILE} 2>&1 &
   sleep 3
   echo "Capabilities may needs a little until running complete, please check log for detail"
@@ -245,18 +235,12 @@ elif [ _"status" = _"${action}" ]; then
   docker-compose ps
   echo "## pipeline status"
 elif [ _"stop" = _"${action}" ]; then
-  #temporary
-  if [ _"jenkins" = _"${capa}" ]; then
-    capa="cap_ci"
-  elif [ _"sonarqube" = _"${capa}" ]; then
-    capa="cap_cq"
-  fi
   docker-compose ${action} ${capa}
 elif [ _"config" = _"${action}" ]; then
   if [ _"all" = _"${capa}" -o _"" = _"${capa}" -o _"jenkins" = _"${capa}" ]; then
     echo "## pipeline config(Jenkins)"
     cd playbooks/jenkins
-    ansible-playbook jenkins_init.yml
+    ansible-playbook jenkins_init.yml --extra-vars "jenkins_host_ip=${PORTAL_LOCALHOST}"
     echo "## pipeline config(Jenkins)"
     cd ../..
     echo
@@ -264,7 +248,7 @@ elif [ _"config" = _"${action}" ]; then
   if [ _"all" = _"${capa}" -o _"" = _"${capa}" -o _"sonarqube" = _"${capa}" ]; then
     echo "## pipeline config(Sonarqube)"
     cd playbooks/sonar
-    ansible-playbook sonar_init.yml
+    ansible-playbook sonar_init.yml --extra-vars "sonar_listen_ip=${PORTAL_LOCALHOST}"
     echo "## pipeline config(Sonarqube)"
     cd ../..
     echo
