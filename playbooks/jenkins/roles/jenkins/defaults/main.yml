@@ -1,5 +1,5 @@
 ---
-jenkins_host_ip: {{ lookup('env','PORTAL_LOCALHOST') }}
+jenkins_host_ip: lookup('env','PORTAL_LOCALHOST')
 jenkins_dest: /var/jenkins_home
 jenkins_local_url: "http://localhost:8080/"
 jenkins_external_url: "http://{{ jenkins_host_ip }}:9080/"
