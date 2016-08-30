@@ -2,8 +2,6 @@
 
 - include: cli.yml
 
-- include: config.yml
-
 - name: "Create custom init scripts directory.{{ jenkins_dest }}/script"
   file:
     path: "{{ jenkins_dest }}/script"
@@ -12,6 +10,8 @@
     group: jenkins
     mode: 0775
 
+# config 
+- include: config.yml
 
 # Create Users
 - include: users.yml
