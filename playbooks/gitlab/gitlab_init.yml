@@ -28,7 +28,7 @@
         - { username: 'admin02', password: 'admin02', name: 'admin02', access_level: 'developer', email: 'admin0@126.com', group_name: 'ansible2' }
       # ----------------------
       local_action: gitlab_user
-                    server_url={{ server_url }}
+                    server_url=http://{{ansible_ssh_host}}:9010
                     validate_certs=true
                     login_user={{ rootuser }}
                     login_password={{ rootpassword }}
@@ -48,9 +48,9 @@
         - { projectName: 'projectB', group: 'ansible2', issues_enabled: true, wiki_enabled: true, snippets_enabled: true, import_url: 'https://github.com/ansible/ansible-modules-extras.git', visibility_level: 20, description: 'projectB for ansible2' }
       # ----------------------
       environment:
-         https_proxy: lookup('env','https_proxy') 
+         https_proxy: lookup('env','https_proxy')
       local_action: gitlab_project
-                    server_url={{ server_url }}
+                    server_url=http://{{ansible_ssh_host}}:9010
                     validate_certs=true
                     login_user={{ rootuser }}
                     login_password={{ rootpassword }}
@@ -61,7 +61,4 @@
                     snippets_enabled={{ item.snippets_enabled }}
                     visibility_level={{ item.visibility_level }}
                     description={{ item.description }}
-                    state=present 
-                    
-
-                    
+                    state=present
