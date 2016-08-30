@@ -101,8 +101,6 @@ services:
       - "9092"
     volumes_from:
       - databox
-    env_file:
-      - ./opendevops_pipeline.env
     restart: never
 
   # devops pipeline portal
