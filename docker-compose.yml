@@ -31,8 +31,6 @@ services:
       - "27017:27017"
     volumes_from:
       - databox
-    env_file:
-      - ./opendevops_pipeline.env
     restart: never
 
   # source configuration management: gitlab
