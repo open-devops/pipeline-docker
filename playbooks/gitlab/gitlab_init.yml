@@ -1,0 +1,67 @@
+---
+- hosts: gitlabservers
+  sudo: yes
+  vars:
+      rootuser: root
+      rootpassword: 5iveL!fe
+  tasks:
+    - name: Creat Default GitLab Groups
+      # modify here for creat groups
+      # ----------------------
+      with_items:
+        - ansible1
+        - ansible2
+      # ----------------------
+      local_action: gitlab_group
+                    server_url=http://{{ansible_ssh_host}}:9010
+                    validate_certs=true
+                    login_user={{ rootuser }}
+                    login_password={{ rootpassword }}
+                    name={{ item }}
+                    state=present
+
+    - name: Creat Default GitLab Users
+      # modify here for creat Users
+      # ----------------------
+      with_items:
+        - { username: 'admin01', password: 'admin01', name: 'admin01', access_level: 'developer', email: 'admin0@xxx.com', group_name: 'ansible1' }
+        - { username: 'admin02', password: 'admin02', name: 'admin02', access_level: 'developer', email: 'admin0@126.com', group_name: 'ansible2' }
+      # ----------------------
+      local_action: gitlab_user
+                    server_url={{ server_url }}
+                    validate_certs=true
+                    login_user={{ rootuser }}
+                    login_password={{ rootpassword }}
+                    name={{ item.name }}
+                    username={{ item.username }}
+                    password={{ item.password }}
+                    state=present
+                    access_level={{ item.access_level }}
+                    group={{ item.group_name }}
+                    email={{ item.email }}
+
+    - name: Creat Default GitLab Projects
+      # modify here for creat projects
+      # ----------------------
+      with_items:
+        - { projectName: 'projectC', group: 'ansible1', issues_enabled: true, wiki_enabled: true, snippets_enabled: true, import_url: 'https://github.com/ansible/ansible-modules-extras.git', visibility_level: 20, description: 'projectC for ansible1' }
+        - { projectName: 'projectB', group: 'ansible2', issues_enabled: true, wiki_enabled: true, snippets_enabled: true, import_url: 'https://github.com/ansible/ansible-modules-extras.git', visibility_level: 20, description: 'projectB for ansible2' }
+      # ----------------------
+      environment:
+         https_proxy: lookup('env','https_proxy') 
+      local_action: gitlab_project
+                    server_url={{ server_url }}
+                    validate_certs=true
+                    login_user={{ rootuser }}
+                    login_password={{ rootpassword }}
+                    name={{ item.projectName }}
+                    group={{ item.group }}
+                    issues_enabled={{ item.issues_enabled }}
+                    wiki_enabled={{ item.wiki_enabled }}
+                    snippets_enabled={{ item.snippets_enabled }}
+                    visibility_level={{ item.visibility_level }}
+                    description={{ item.description }}
+                    state=present 
+                    
+
+                    

@@ -253,6 +253,15 @@ elif [ _"config" = _"${action}" ]; then
     cd ../..
     echo
   fi
+  if [ _"all" = _"${capa}" -o _"" = _"${capa}" -o _"gitlab" = _"${capa}" ]; then
+    echo "## pipeline config(Gitlab)"
+    cd playbooks/gitlab
+    #ansible-playbook gitlab_init.yml --extra-vars "env_ansible_ssh_host=${PORTAL_LOCALHOST} env_ansible_ssh_user=${ansible_ssh_user} env_ansible_ssh_pass=${ansible_ssh_pass} env_ansible_sudo_pass=${ansible_sudo_pass}" 
+    ansible-playbook gitlab_init.yml --extra-vars "ansible_ssh_host=${PORTAL_LOCALHOST} https_proxy=${https_proxy}"
+    echo "## pipeline config(Gitlab)"
+    cd ../..
+    echo
+  fi
 else
   usage
   exit 1

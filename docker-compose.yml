@@ -90,6 +90,8 @@ services:
       - "5000"
     env_file:
       - ./opendevops_pipeline.env
+    environment:
+      - JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dhttp.proxyHost=${http_proxy_host} -Dhttp.proxyPort=${http_proxy_port} -Dhttps.proxyHost=${https_proxy_host} -Dhttps.proxyPort=${https_proxy_port}
     restart: never
 
   # continous quality assurance

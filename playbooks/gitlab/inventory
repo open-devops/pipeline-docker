@@ -1,0 +1,7 @@
+gitlabserver1 ansible_ssh_host=192.168.32.31 ansible_ssh_user=admin ansible_ssh_pass=123456 ansible_sudo_pass=123456
+
+[gitlabservers]
+gitlabserver1
+
+
+
