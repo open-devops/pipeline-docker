@@ -47,9 +47,9 @@ services:
       - ./opendevops_pipeline.env
     restart: never
 
-  # configuration management: artifactory
-  artifactory:
-    image: devopsopen/docker-scm-artifactory
+  # repository management: nexus
+  nexus:
+    image: devopsopen/docker-repo-nexus
     ports:
       - "9011:8081"
     env_file:
