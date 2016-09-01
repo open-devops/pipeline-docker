@@ -187,7 +187,7 @@ usage(){
   echo "Usage: $0 init|up|status|stop|config [capability]"
   echo "       capablity: jenkins|mongodb|mariadb"
   echo "                  sonarqube|gitlab|wekan"
-  echo "                  jira|artifactory|hygieia"
+  echo "                  jira|nexus|hygieia"
   echo "                  all(default)"
 }
 
@@ -204,8 +204,8 @@ fi
 date
 if [ _"init" = _"${action}" ]; then
   echo "##  pipeline init will pull latest images from devopsopen of dockhub"
-  for image in base pipeline-portal ci-jenkins com-mongo cq-sonarqube ca-wekan ca-jira scm-artifactory \
-      scm-gitlab cov-cadvisor cov-hyapi cov-hygui cov-hyson cov-hyjen cov-hysvn cov-hygit
+  for image in base pipeline-portal ci-jenkins com-mongo cq-sonarqube ca-wekan ca-jira repo-nexus \
+      scm-gitlab cov-cadvisor cov-hyapi cov-hygui cov-hyson cov-hyjen cov-hysvn cov-hygit cov-hyk8s
   do
     pull_docker_image devopsopen/docker-${image} &
   done
@@ -218,8 +218,8 @@ if [ _"init" = _"${action}" ]; then
   tbl_set_size 50 10 15 15
   tbl_set_title IMAGE TAG IMAGE_ID SIZE
   tbl_print_title
-  for image in base pipeline-portal ci-jenkins com-mongo cq-sonarqube ca-wekan ca-jira scm-artifactory \
-      scm-gitlab cov-cadvisor cov-hyapi cov-hygui cov-hyson cov-hyjen cov-hysvn cov-hygit
+  for image in base pipeline-portal ci-jenkins com-mongo cq-sonarqube ca-wekan ca-jira reop-nexus \
+      scm-gitlab cov-cadvisor cov-hyapi cov-hygui cov-hyson cov-hyjen cov-hysvn cov-hygit cov-hyk8s
   do
     show_docker_image devopsopen/docker-${image}
   done
