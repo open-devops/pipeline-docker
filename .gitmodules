@@ -1,3 +1,69 @@
 [submodule "images/jenkins"]
 	path = images/jenkins
 	url = https://github.com/open-devops/docker-ci-jenkins
+[submodule "images/redmine"]
+	path = images/redmine
+	url = https://github.com/open-devops/docker-ca-redmine
+[submodule "images/gitlab"]
+	path = images/gitlab
+	url = https://github.com/open-devops/docker-scm-gitlab
+[submodule "images/hygieia/hyapi"]
+	path = images/hygieia/hyapi
+	url = https://github.com/open-devops/docker-cov-hyapi
+[submodule "images/jira"]
+	path = images/jira
+	url = https://github.com/open-devops/docker-ca-jira
+[submodule "images/mariadb"]
+	path = images/mariadb
+	url = https://github.com/open-devops/docker-com-maria
+[submodule "images/hygieia/hyson"]
+	path = images/hygieia/hyson
+	url = https://github.com/open-devops/docker-cov-hyson
+[submodule "images/hygieia/hyjen"]
+	path = images/hygieia/hyjen
+	url = https://github.com/open-devops/docker-cov-hyjen
+[submodule "images/hygieia/hysvn"]
+	path = images/hygieia/hysvn
+	url = https://github.com/open-devops/docker-cov-hysvn
+[submodule "images/hygieia/hygit"]
+	path = images/hygieia/hygit
+	url = https://github.com/open-devops/docker-cov-hygit
+[submodule "images/artifactory"]
+	path = images/artifactory
+	url = https://github.com/open-devops/docker-scm-artifactory
+[submodule "images/hygieia/hygui"]
+	path = images/hygieia/hygui
+	url = https://github.com/open-devops/docker-cov-hygui
+[submodule "images/mongodb"]
+	path = images/mongodb
+	url = https://github.com/open-devops/docker-com-mongo
+[submodule "images/sonarqube"]
+	path = images/sonarqube
+	url = https://github.com/open-devops/docker-cq-sonarqube
+[submodule "images/base"]
+	path = images/base
+	url = https://github.com/open-devops/docker-base
+[submodule "images/cadvisor"]
+	path = images/cadvisor
+	url = https://github.com/open-devops/docker-cov-cadvisor
+[submodule "images/ansible"]
+	path = images/ansible
+	url = https://github.com/open-devops/docker-coc-ansible
+[submodule "images/wekan"]
+	path = images/wekan
+	url = https://github.com/open-devops/docker-ca-wekan
+[submodule "images/redis"]
+	path = images/redis
+	url = https://github.com/open-devops/docker-com-redis
+[submodule "images/hygieia/hyk8s"]
+	path = images/hygieia/hyk8s
+	url = https://github.com/open-devops/docker-cov-hyk8s
+[submodule "images/nexus"]
+	path = images/nexus
+	url = https://github.com/open-devops/docker-repo-nexus
+[submodule "images/fluentd"]
+	path = images/fluentd
+	url = https://github.com/open-devops/docker-log-fluentd
+[submodule "images/elasticsearch"]
+	path = images/elasticsearch
+	url = https://github.com/open-devops/docker-log-es
