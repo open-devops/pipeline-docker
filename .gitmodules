@@ -1,0 +1,3 @@
+[submodule "images/jenkins"]
+	path = images/jenkins
+	url = https://github.com/open-devops/docker-ci-jenkins
