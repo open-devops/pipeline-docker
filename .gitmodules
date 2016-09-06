@@ -67,6 +67,3 @@
 [submodule "images/elasticsearch"]
 	path = images/elasticsearch
 	url = https://github.com/open-devops/docker-log-es
-[submodule "images/rancher"]
-	path = images/rancher
-	url = https://github.com/open-devops/docker-rancher
