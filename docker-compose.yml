@@ -35,7 +35,7 @@ services:
 
   # source configuration management: gitlab
   gitlab:
-    image: devopsopen/docker-scm-gitlab
+    image: devopsopen/dosoncker-scm-gitlab
     ports:
       - "9010:80"
     expose:
@@ -114,6 +114,12 @@ services:
       - "9000:9000"
     expose:
       - "9092"
+    environment:
+      - JAVA_OPTS=-Dhttp.proxyHost=${http_proxy_host}
+                  -Dhttp.proxyPort=${http_proxy_port}
+                  -Dhttps.proxyHost=${https_proxy_host}
+                  -Dhttps.proxyPort=${https_proxy_port}
+                  -Duser.timezone=Asia/Shanghai
     volumes_from:
       - databox
     restart: never
