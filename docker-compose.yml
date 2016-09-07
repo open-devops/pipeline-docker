@@ -81,7 +81,7 @@ services:
 
   # continous integration : jenkins
   jenkins:
-    image: devopsopen/docker-ci-jenkins:alpine
+    image: devopsopen/docker-ci-jenkins
     ports:
       - "9080:8080"
     expose:
