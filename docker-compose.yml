@@ -81,15 +81,30 @@ services:
 
   # continous integration : jenkins
   jenkins:
-    image: devopsopen/docker-ci-jenkins
+    image: devopsopen/docker-ci-jenkins:alpine
     ports:
       - "9080:8080"
     expose:
-      - "5000"
+      - "50000"
     env_file:
-      - ./opendevops_pipeline.env
+      - opendevops_pipeline.env
+      - jenkins-master.env
     environment:
-      - JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dhttp.proxyHost=${http_proxy_host} -Dhttp.proxyPort=${http_proxy_port} -Dhttps.proxyHost=${https_proxy_host} -Dhttps.proxyPort=${https_proxy_port}
+      - JAVA_OPTS=-Djava.awt.headless=true
+                  -Djenkins.install.runSetupWizard=false
+                  -Dhttp.proxyHost=${http_proxy_host}
+                  -Dhttp.proxyPort=${http_proxy_port}
+                  -Dhttps.proxyHost=${https_proxy_host}
+                  -Dhttps.proxyPort=${https_proxy_port}
+                  -Duser.timezone=Asia/Shanghai
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
+      - http_proxy_host=${http_proxy_host}
+      - http_proxy_port=${http_proxy_port}
+      - https_proxy_host=${https_proxy_host}
+      - https_proxy_port=${https_proxy_port}
+      - DOCKER_HOST=${DOCKER_HOST}
     restart: never
 
   # continous quality assurance
