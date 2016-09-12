@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  # data container
+  portal_databox:
+    image: devopsopen/docker-base
+    volumes:
+      # for mongo
+      - /data/configdb
+      - /data/db
+      # for portal
+      - /portal/config
+      - /portal/log
+      - /portal/data
+
+  # database service: mongodb
+  mongo:
+    image: devopsopen/docker-com-mongo
+    ports:
+      - "27017:27017"
+    volumes_from:
+      - portal_databox
+    restart: never
+
+  portal:
+    image: devopsopen/docker-pipeline-portal
+    ports:
+      - "9999:3000"
+    volumes_from:
+      - portal_databox
+    env_file:
+      - ./opendevops_pipeline.env
+    restart: never
