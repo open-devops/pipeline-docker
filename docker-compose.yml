@@ -28,7 +28,7 @@ services:
   mongo:
     image: devopsopen/docker-com-mongo
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes_from:
       - databox
     restart: never
@@ -107,7 +107,7 @@ services:
     restart: never
 
   # continous quality assurance
-  sonarqube:
+  sonar:
     image: devopsopen/docker-cq-sonarqube
     ports:
       - "9000:9000"
@@ -121,17 +121,6 @@ services:
                   -Duser.timezone=Asia/Shanghai
     volumes_from:
       - databox
-    restart: never
-
-  # devops pipeline portal
-  portal:
-    image: devopsopen/docker-pipeline-portal
-    ports:
-      - "9999:3000"
-    volumes_from:
-      - databox
-    env_file:
-      - ./opendevops_pipeline.env
     restart: never
 
   # container resource monitor
@@ -170,7 +159,7 @@ services:
     image: devopsopen/docker-cov-hyson
     links:
       - mongo:mongo
-      - sonarqube
+      - sonar
     env_file:
       - ./opendevops_pipeline.env
     restart: never
