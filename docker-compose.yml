@@ -35,7 +35,7 @@ services:
 
   # source configuration management: gitlab
   gitlab:
-    image: devopsopen/dosoncker-scm-gitlab
+    image: devopsopen/docker-scm-gitlab
     ports:
       - "9010:80"
     expose:
