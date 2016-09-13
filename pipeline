@@ -184,7 +184,7 @@ show_docker_image(){
 }
 
 usage(){
-  echo "Usage: $0 init|up|status|stop|restart|config [capability]"
+  echo "Usage: $0 init|up|start|status|stop|restart|down|config [capability]"
   echo "       capablity: jenkins|mongodb|mariadb"
   echo "                  sonarqube|gitlab|wekan"
   echo "                  jira|nexus|hygieia"
@@ -229,7 +229,7 @@ if [ _"init" = _"${action}" ]; then
   do
     show_docker_image devopsopen/docker-${image}
   done
-elif [ _"start" = _"${action}" -o _"restart" = _"${action}"  ]; then
+elif [ _"start" = _"${action}" -o _"restart" = _"${action}" -o _"down" = _"${action}"  ]; then
   docker-compose ${action} ${capa}
 elif [ _"up" = _"${action}" ]; then
   docker-compose ${action} ${capa} >${TEMP_LOG_FILE} 2>&1 &
@@ -262,6 +262,11 @@ elif [ _"config" = _"${action}" ]; then
   if [ _"all" = _"${capa}" -o _"" = _"${capa}" -o _"gitlab" = _"${capa}" ]; then
     echo "## pipeline config(Gitlab)"
     cd playbooks/gitlab
+    #Replace local machine IP by environment variables
+    sed -i s/192.168.32.131/${PORTAL_LOCALHOST}/g inventory
+    #Replace by environment variables
+    sed -i s/admin/${ANSIBLE_SUDO_SUER}/g inventory
+    sed -i s/123456/${ANSIBLE_SUDO_PASSWORD}/g inventory
     ansible-playbook gitlab_init.yml --extra-vars "ansible_ssh_host=${PORTAL_LOCALHOST} https_proxy=${https_proxy}"
     echo "## pipeline config(Gitlab)"
     cd ../..
