@@ -22,8 +22,75 @@ services:
       - portal_databox
     restart: never
 
+  # Spring Cloud Config Server
+  config:
+    image: pipeline-config-service
+    ports:
+      - "8888:8888"
+    restart: never
+
+  # Spring Cloud Eureka Server
+  discovery:
+    image: pipeline-service-management-service
+    depends_on:
+      - config
+    ports:
+      - "8500:8500"
+    restart: never
+
+  # Pipeline Account Service
+  accountService:
+    image: pipeline-account-service
+    depends_on:
+      - discovery
+    restart: never
+
+  # Pipeline Role Service
+  roleService:
+    image: pipeline-role-service
+    depends_on:
+      - discovery
+    restart: never
+
+  # Pipeline Role Service
+  organizationService:
+    image: pipeline-organization-service
+    depends_on:
+      - discovery
+    restart: never
+
+  # Pipeline Product Service
+  productService:
+    image: pipeline-product-service
+    depends_on:
+      - discovery
+    restart: never
+
+  # Pipeline Permission Service
+  permissionService:
+    image: pipeline-permission-service
+    depends_on:
+      - discovery
+    restart: never
+
+  # Spring Cloud Zuul Server
+  gateway:
+    image: pipeline-apigateway-service
+    depends_on:
+      - accountService
+      - roleService
+      - organizationService
+      - productService
+      - permissionService
+    ports:
+      - "8600:8600"
+    restart: never
+
+  # Pipeline Portal Front-End
   portal:
     image: devopsopen/docker-pipeline-portal
+    depends_on:
+      - gateway
     ports:
       - "9999:3000"
     volumes_from:
