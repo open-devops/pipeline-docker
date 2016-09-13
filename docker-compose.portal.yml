@@ -33,7 +33,7 @@ services:
 
   # Spring Cloud Eureka Server
   discovery:
-    image: pipeline-service-management-service
+    image: devopsopen/pipeline-service-management-service
     depends_on:
       - config
     ports:
