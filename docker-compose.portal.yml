@@ -25,6 +25,8 @@ services:
   # Spring Cloud Config Server
   config:
     image: devopsopen/pipeline-config-service
+    depends_on:
+      - mongo
     ports:
       - "8888:8888"
     restart: never
