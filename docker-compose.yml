@@ -67,11 +67,23 @@ services:
       - ./opendevops_pipeline.env
     restart: never
 
-  # continous assesement : Jira
+  # Requirement Management : Jira
   jira:
     image: devopsopen/docker-ca-jira
     ports:
       - "9091:8080"
+    volumes:
+      - /var/atlassian/jira
+      - /opt/atlassian/jira/logs
+    env_file:
+      - ./opendevops_pipeline.env
+    restart: never
+
+  # Requirement Management : Redmine
+  jira:
+    image: devopsopen/docker-ca-redmine
+    ports:
+      - "9092:3000"
     volumes:
       - /var/atlassian/jira
       - /opt/atlassian/jira/logs
