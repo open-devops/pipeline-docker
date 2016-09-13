@@ -128,8 +128,6 @@ services:
     image: devopsopen/docker-cov-cadvisor
     ports:
       - "9998:8080"
-    env_file:
-      - ./opendevops_pipeline.env
     restart: never
 
   # hygieia : monitor
