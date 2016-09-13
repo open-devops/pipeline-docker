@@ -263,9 +263,9 @@ elif [ _"config" = _"${action}" ]; then
     echo "## pipeline config(Gitlab)"
     cd playbooks/gitlab
     #Replace local machine IP by environment variables
-    sed -i s/192.168.32.131/${PORTAL_LOCALHOST}/g inventory
+    sed -i s/192.168.32.31/${PORTAL_LOCALHOST}/g inventory
     #Replace by environment variables
-    sed -i s/admin/${ANSIBLE_SUDO_SUER}/g inventory
+    sed -i s/admin/${ANSIBLE_SUDO_USER}/g inventory
     sed -i s/123456/${ANSIBLE_SUDO_PASSWORD}/g inventory
     ansible-playbook gitlab_init.yml --extra-vars "ansible_ssh_host=${PORTAL_LOCALHOST} https_proxy=${https_proxy}"
     echo "## pipeline config(Gitlab)"
