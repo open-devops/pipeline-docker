@@ -253,7 +253,10 @@ elif [ _"config" = _"${action}" ]; then
   fi
   if [ _"all" = _"${capa}" -o _"" = _"${capa}" -o _"sonarqube" = _"${capa}" ]; then
     echo "## pipeline config(Sonarqube)"
+    SONAR_CONTAINER_NAME=`sh pipeline  status |grep sonarqube |awk '{print $1}'`
     cd playbooks/sonar
+    #Replace by environment variables
+    sed -i s/pipelinedocker_sonarqube_1/${SONAR_CONTAINER_NAME}/g inventory
     ansible-playbook sonar_init.yml --extra-vars "sonar_listen_ip=${PORTAL_LOCALHOST}"
     echo "## pipeline config(Sonarqube)"
     cd ../..
