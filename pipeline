@@ -199,6 +199,12 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
+#Replace local machine IP by environment variables
+sed -i s/192.168.32.131/${PORTAL_LOCALHOST}/g opendevops_pipeline.env
+
+#Replace proxy address by environment variables
+sed -i s@ENV_PROXY_PORT_URL@${http_proxy}@g opendevops_pipeline.env
+
 . ./opendevops_pipeline.env
 
 date
@@ -224,10 +230,6 @@ if [ _"init" = _"${action}" ]; then
     show_docker_image devopsopen/docker-${image}
   done
 elif [ _"start" = _"${action}" -o _"restart" = _"${action}"  ]; then
-  #Replace local machine IP by environment variables
-  sed -i s/192.168.32.131/${PORTAL_LOCALHOST}/g opendevops_pipeline.env
-  #Replace proxy address by environment variables
-  sed -i s@ENV_PROXY_PORT_URL@${http_proxy}@g opendevops_pipeline.env
   docker-compose ${action} ${capa}
 elif [ _"up" = _"${action}" ]; then
   docker-compose ${action} ${capa} >${TEMP_LOG_FILE} 2>&1 &
