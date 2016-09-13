@@ -23,6 +23,8 @@ services:
       - /portal/config
       - /portal/log
       - /portal/data
+      # for Redmine
+      - /usr/src/redmine/files
 
   # database service: mongodb
   mongo:
@@ -85,8 +87,7 @@ services:
     ports:
       - "9092:3000"
     volumes:
-      - /var/atlassian/jira
-      - /opt/atlassian/jira/logs
+      - /usr/src/redmine/files
     env_file:
       - ./opendevops_pipeline.env
     restart: never
