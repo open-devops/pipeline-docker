@@ -82,7 +82,7 @@ services:
     restart: never
 
   # Requirement Management : Redmine
-  jira:
+  redmine:
     image: devopsopen/docker-ca-redmine
     ports:
       - "9092:3000"
