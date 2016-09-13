@@ -107,7 +107,7 @@ services:
     restart: never
 
   # continous quality assurance
-  sonar:
+  sonarqube:
     image: devopsopen/docker-cq-sonarqube
     ports:
       - "9000:9000"
@@ -159,7 +159,7 @@ services:
     image: devopsopen/docker-cov-hyson
     links:
       - mongo:mongo
-      - sonar
+      - sonarqube
     env_file:
       - ./opendevops_pipeline.env
     restart: never
