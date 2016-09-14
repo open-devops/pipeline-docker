@@ -2,9 +2,9 @@
 
 - include: cli.yml
 
-- name: "Create custom init scripts directory.{{ jenkins_dest }}/script"
+- name: "Create custom init scripts directory.{{ jenkins_home }}/script"
   file:
-    path: "{{ jenkins_dest }}/script"
+    path: "{{ jenkins_home }}/script"
     state: directory
     owner: jenkins
     group: jenkins

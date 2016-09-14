@@ -5,11 +5,11 @@
 - name: Copy addUsers.goorvy to jenkins
   template:
     src: addUsers.groovy
-    dest: "{{ jenkins_dest }}/script/addUsers.goorvy"
+    dest: "{{ jenkins_home }}/script/addUsers.goorvy"
   register: jenkins_users_config
 
 - name: add user
   command: > 
-     {{ jenkins_cli_cmd }} groovy {{ jenkins_dest }}/script/addUsers.goorvy {{ item.user }} {{ item.password }} --username {{ jenkins_admin_user }} --password {{ jenkins_admin_password }}
+     {{ jenkins_cli_cmd }} groovy {{ jenkins_home }}/script/addUsers.goorvy {{ item.user }} {{ item.password }} --username {{ jenkins_admin_user }} --password {{ jenkins_admin_password }}
   with_items: "{{jenkins_accounts}}"
   when: jenkins_accounts | count > 0

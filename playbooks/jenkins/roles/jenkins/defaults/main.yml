@@ -1,9 +1,9 @@
 ---
-jenkins_dest: /var/jenkins_home
+jenkins_home: /var/jenkins_home
 jenkins_local_url: "http://localhost:8080/"
 jenkins_external_url: "http://{{ jenkins_host_ip }}:9080/"
 
-jenkins_cli_dest: "{{ jenkins_dest }}/jenkins-cli.jar"
+jenkins_cli_dest: "{{ jenkins_home }}/jenkins-cli.jar"
 jenkins_cli_cmd: "java -jar {{ jenkins_cli_dest }} -s {{ jenkins_local_url }}"
 jenkins_admin_user: "admin"
 jenkins_admin_password: "admin"

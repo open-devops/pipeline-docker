@@ -1,7 +1,7 @@
 ---
 
-- name: "Create Jenkins CLI destination directory: {{ jenkins_dest }}"
-  file: path={{ jenkins_dest }} state=directory
+- name: "Create Jenkins CLI destination directory: {{ jenkins_home }}"
+  file: path={{ jenkins_home }} state=directory
 
 #- name: Get Jenkins CLI
 #  get_url: url="{{ jenkins_local_url }}jnlpJars/jenkins-cli.jar" dest="{{ cli_dest }}" mode=0440
@@ -11,4 +11,4 @@
 #  delay: 10
 
 - name: Get Jenkins CLI
-  command: "cp {{jenkins_dest}}/war/WEB-INF/jenkins-cli.jar {{jenkins_dest}}"
+  command: "cp {{jenkins_home}}/war/WEB-INF/jenkins-cli.jar {{jenkins_home}}"

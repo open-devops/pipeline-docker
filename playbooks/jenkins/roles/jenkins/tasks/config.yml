@@ -2,19 +2,19 @@
 - name: Copy create-credential.groovy to jenkins
   template:
     src: create-credential.groovy
-    dest: "{{ jenkins_dest }}/script/create-credential.goorvy"
+    dest: "{{ jenkins_home }}/script/create-credential.goorvy"
 
 - name: create credential
   command: > 
-     {{ jenkins_cli_cmd }} groovy {{ jenkins_dest }}/script/create-credential.goorvy --username {{ jenkins_admin_user }} --password {{ jenkins_admin_password }}
+     {{ jenkins_cli_cmd }} groovy {{ jenkins_home }}/script/create-credential.goorvy --username {{ jenkins_admin_user }} --password {{ jenkins_admin_password }}
   
 - name: Configure Jenkins 
-  template: src=jenkins_system_config_jenkins.xml.j2 dest={{ jenkins_dest }}/jenkins.model.JenkinsLocationConfiguration.xml owner=jenkins group=jenkins force=yes
+  template: src=jenkins_system_config_jenkins.xml.j2 dest={{ jenkins_home }}/jenkins.model.JenkinsLocationConfiguration.xml owner=jenkins group=jenkins force=yes
 
 - name: Configure Gitlab 
-  template: src=jenkins_system_config_gitlab.xml.j2 dest={{ jenkins_dest }}/com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig.xml owner=jenkins group=jenkins force=yes
+  template: src=jenkins_system_config_gitlab.xml.j2 dest={{ jenkins_home }}/com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig.xml owner=jenkins group=jenkins force=yes
 
 - name: Configure sonarqube 
-  template: src=jenkins_system_config_sonarqube.xml.j2 dest={{ jenkins_dest }}/hudson.plugins.sonar.SonarGlobalConfiguration.xml owner=jenkins group=jenkins force=yes
+  template: src=jenkins_system_config_sonarqube.xml.j2 dest={{ jenkins_home }}/hudson.plugins.sonar.SonarGlobalConfiguration.xml owner=jenkins group=jenkins force=yes
 
 
