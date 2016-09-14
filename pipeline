@@ -245,7 +245,10 @@ elif [ _"stop" = _"${action}" ]; then
 elif [ _"config" = _"${action}" ]; then
   if [ _"all" = _"${capa}" -o _"" = _"${capa}" -o _"jenkins" = _"${capa}" ]; then
     echo "## pipeline config(Jenkins)"
+    JENKINS_CONTAINER_NAME=`sh pipeline status |grep jenkins |awk '{print $1}'`
     cd playbooks/jenkins
+    # Replace jenkins container prefix by environment variables
+    sed -i s/pipelinedocker_jenkins_1/${JENKINS_CONTAINER_NAME}/g inventory
     ansible-playbook jenkins_init.yml --extra-vars "jenkins_host_ip=${PORTAL_LOCALHOST}"
     echo "## pipeline config(Jenkins)"
     cd ../..
