@@ -112,10 +112,9 @@ services:
       - http_proxy=${http_proxy}
       - https_proxy=${https_proxy}
       - no_proxy=${no_proxy}
-      - http_proxy_host=${http_proxy_host}
-      - http_proxy_port=${http_proxy_port}
-      - https_proxy_host=${https_proxy_host}
-      - https_proxy_port=${https_proxy_port}
+      - M2_PROXY_HOST=${http_proxy_host}
+      - M2_PROXY_PORT=${http_proxy_port}
+      - M2_NO_PROXY=${no_proxy}
       - DOCKER_HOST=${DOCKER_HOST}
     restart: never
 
