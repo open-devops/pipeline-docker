@@ -7,18 +7,12 @@ jenkins_cli_dest: "{{ jenkins_home }}/jenkins-cli.jar"
 jenkins_cli_cmd: "java -jar {{ jenkins_cli_dest }} -s {{ jenkins_local_url }}"
 jenkins_admin_user: "admin"
 jenkins_admin_password: "admin"
-jenkins_admin_mail: "openDevops@sample.com"
+jenkins_admin_mail: "open.devops@gmail.com"
 jenkins_accounts :
      - user      : "admin01"
        password  : "admin01"
-
      - user      : "admin02"
        password  : "admin02"
-
-plugins:
-   - 'sonar'
-   - 'gitlab-plugin'
-   - 'workflow-aggregator'
 
 jenkins_jobs:
    - name: ansible-jenkins-job1
