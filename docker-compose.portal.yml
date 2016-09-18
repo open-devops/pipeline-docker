@@ -91,7 +91,7 @@ services:
 
   # Pipeline Portal Front-End
   portal:
-    image: devopsopen/docker-pipeline-portal
+    image: devopsopen/pipeline-portal
     depends_on:
       - gateway
     ports:
