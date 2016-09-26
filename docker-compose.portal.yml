@@ -38,7 +38,6 @@ services:
       - config
     ports:
       - "8500:8500"
-    entrypoint: ./wait-for-it.sh config:8888
     restart: never
 
   # Pipeline Account Service
