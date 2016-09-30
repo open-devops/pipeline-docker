@@ -118,6 +118,24 @@ services:
       - DOCKER_HOST=${DOCKER_HOST}
     restart: never
 
+  # Continuous Delivery
+  deck:
+    image: devopsopen/docker-cd-deck
+    ports:
+      - "9085:9000"
+    environment:
+      - API_HOST=${DECK_API_HOST}:${DECK_API_PORT}/gate
+      - BAKERY_HOST=${DECK_API_HOST}/rosco
+      - DECK_HOST=0.0.0.0
+      - DECK_PORT=${DECK_API_PORT}
+      - PROTOCOL=http
+      - AUTH_ENABLED=false
+      - AUTH_ENDPOINT=${DECK_API_HOST}/gate/auth/users
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
+    restart: never
+
   # continous quality assurance
   sonarqube:
     image: devopsopen/docker-cq-sonarqube
